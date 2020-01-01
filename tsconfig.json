@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "rootDir": "source",
+        "outDir": "build",
+
+        "target": "es5",
+        "experimentalDecorators": true
+    }
+}
