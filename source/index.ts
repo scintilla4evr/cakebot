@@ -1,8 +1,7 @@
-import {Bot} from "./bot"
-import {PostgresStorage} from "./bot/storage/postgres"
-
-import {join} from "path"
+import { Bot } from "./bot"
 import { setupStorage } from "./bot/storage/storage"
+
+import { join } from "path"
 
 let cake = new Bot(
     process.env.DISCORD_API_KEY,

@@ -1,22 +1,20 @@
 import {
-    Client,
-    Message, GuildMember, User,
-    Guild, Channel,
-    Snowflake
+    Client
 } from "discord.js"
-import { exists } from "fs";
 
 import {
-    Command, MessageContent
-} from "./commands"
+    Command, processMessage
+} from "./commands/commands"
 import {
     IStorageHandler
 } from "./storage"
+import { ArgumentParser } from "./commands/arguments/parser"
 
 export class Bot {
     public client: Client
 
     public commands: Command[] = []
+    public parser = new ArgumentParser()
 
     public storage: IStorageHandler
 
@@ -29,11 +27,11 @@ export class Bot {
 
         this.client.on("message", (message) => {
             if (message.author === this.client.user) return
-            MessageContent.processMessage(this, message)
+            processMessage(this, message)
         })
     }
 
-    public addCommand(command: Command) {
-        this.commands.push(command)
+    public addCommand(...commands: Command[]) {
+        this.commands.push(...commands)
     }
 }

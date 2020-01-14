@@ -3,7 +3,10 @@
         "rootDir": "source",
         "outDir": "build",
 
-        "target": "es5",
-        "experimentalDecorators": true
+        "target": "ES6",
+        "experimentalDecorators": true,
+        
+        "module": "CommonJS",
+        "moduleResolution": "Node"
     }
 }

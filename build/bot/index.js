@@ -1,23 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var discord_js_1 = require("discord.js");
-var commands_1 = require("./commands");
-var Bot = /** @class */ (function () {
-    function Bot(apiKey, commandPrefix) {
-        var _this = this;
+const discord_js_1 = require("discord.js");
+const commands_1 = require("./commands/commands");
+const parser_1 = require("./commands/arguments/parser");
+class Bot {
+    constructor(apiKey, commandPrefix) {
         this.commandPrefix = commandPrefix;
         this.commands = [];
+        this.parser = new parser_1.ArgumentParser();
         this.client = new discord_js_1.Client();
         this.client.login(apiKey);
-        this.client.on("message", function (message) {
-            if (message.author === _this.client.user)
+        this.client.on("message", (message) => {
+            if (message.author === this.client.user)
                 return;
-            commands_1.MessageContent.processMessage(_this, message);
+            commands_1.processMessage(this, message);
         });
     }
-    Bot.prototype.addCommand = function (command) {
-        this.commands.push(command);
-    };
-    return Bot;
-}());
+    addCommand(...commands) {
+        this.commands.push(...commands);
+    }
+}
 exports.Bot = Bot;
