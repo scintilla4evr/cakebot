@@ -21,3 +21,17 @@ export function fxGrayscale(mix: number): Shader {
         return color
     }
 }
+
+export function fxInvert(mix: number): Shader {
+    mix = Math.min(Math.max(mix, 0), 1)
+
+    return (image: Image, x: number, y: number) => {
+        let color = image.sample(x, y)
+
+        color.r = lerp(mix, color.r, 1 - color.r)
+        color.g = lerp(mix, color.g, 1 - color.g)
+        color.b = lerp(mix, color.b, 1 - color.b)
+
+        return color
+    }
+}

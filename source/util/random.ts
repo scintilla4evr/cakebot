@@ -4,7 +4,7 @@ export function randomInt(min = 0, max = 1): number {
     )
 }
 
-export function pick<T>(array: T[]): T {
+export function pickRandom<T>(array: T[]): T {
     return array[
         Math.floor(Math.random() * array.length)
     ]

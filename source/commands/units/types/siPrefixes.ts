@@ -48,16 +48,28 @@ export class SIUnit implements IUnit {
     }
 
     convertToUnit(base: number) {
-        return this.unit.convertToUnit(base) * this.siMultiplier
+        return this.unit.convertToUnit(base) / this.siMultiplier
     }
 
     convertFromUnit(unit: number) {
-        return this.unit.convertFromUnit(unit / this.siMultiplier)
+        return this.unit.convertFromUnit(unit * this.siMultiplier)
+    }
+}
+
+export class BinarySIUnit extends SIUnit {
+    get siMultiplier() {
+        return 1024 ** (this.prefix.exponent / 3)
     }
 }
 
 export function createSIUnits(unit: IUnit): SIUnit[] {
     return prefixes.map(
         prefix => new SIUnit(unit, prefix)
+    )
+}
+
+export function createBinarySIUnits(unit: IUnit): BinarySIUnit[] {
+    return prefixes.map(
+        prefix => new BinarySIUnit(unit, prefix)
     )
 }

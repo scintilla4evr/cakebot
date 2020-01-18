@@ -1,7 +1,7 @@
 import { Command } from "../../../bot/commands/commands"
 import { Bot } from "../../../bot"
 import { Message } from "discord.js"
-import { pick } from "../../../util/random"
+import { pickRandom } from "../../../util/random"
 
 export class EightBallCommand extends Command {
     public ballAnswers = [
@@ -39,7 +39,7 @@ export class EightBallCommand extends Command {
         message: Message,
         args: {}
     ) {
-        let ballMessage = pick(this.ballAnswers)
+        let ballMessage = pickRandom(this.ballAnswers)
 
         await message.channel.send(
             `The :8ball: says ${ballMessage}.`
