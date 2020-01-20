@@ -9,6 +9,8 @@
         "lib": ["ESNext"],
         
         "module": "CommonJS",
-        "moduleResolution": "Node"
+        "moduleResolution": "Node",
+
+        "sourceMap": true
     }
 }

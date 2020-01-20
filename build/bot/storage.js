@@ -10,3 +10,4 @@ class StorageUtil {
     }
 }
 exports.StorageUtil = StorageUtil;
+//# sourceMappingURL=storage.js.map

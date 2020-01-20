@@ -45,6 +45,8 @@ export async function processMessage(
                     `Invalid syntax.`
                 )
             }
+        } else {
+            console.log(e)
         }
     }
 }

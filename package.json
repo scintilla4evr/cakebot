@@ -14,6 +14,7 @@
     "@types/pg": "^7.11.0"
   },
   "dependencies": {
+    "canvas": "^2.6.1",
     "discord.js": "^11.5.1",
     "dotenv-safe": "^8.2.0",
     "jimp": "^0.9.3",

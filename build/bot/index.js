@@ -21,3 +21,4 @@ class Bot {
     }
 }
 exports.Bot = Bot;
+//# sourceMappingURL=index.js.map
