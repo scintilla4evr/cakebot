@@ -15,7 +15,7 @@ export class UIImage {
     }
 }
 
-type UIImageResolvable = UIImage | string | Buffer | GfxImage
+export type UIImageResolvable = UIImage | string | Buffer | GfxImage
 
 export async function resolveUIImage(img: UIImageResolvable): Promise<UIImage> {
     if (img instanceof GfxImage) {

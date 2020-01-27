@@ -1,6 +1,6 @@
 import { Size, Offset, Component } from "./components/component"
 import { CanvasRenderingContext2D } from "canvas"
-import { Fill } from "./fill"
+import { Fill } from "./fill/"
 import { resolveColor, ColorResolvable } from "./types"
 
 export type OutlineBounds = {

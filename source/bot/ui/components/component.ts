@@ -1,6 +1,6 @@
 import { CanvasRenderingContext2D } from "canvas";
 import { ComponentStyle, BoxType } from "../style";
-import { Fill } from "../fill";
+import { Fill } from "../fill/";
 import { FillResolvable, resolveFill } from "../types";
 
 export type Size = {

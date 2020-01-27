@@ -1,6 +1,7 @@
 import { Color } from "../graphics/color";
-import { Fill, SolidColorFill } from "./fill";
 import { Component } from "./components/component";
+import { Fill } from "./fill";
+import { SolidColorFill } from "./fill/solid";
 
 export type ColorResolvable = string | Color
 

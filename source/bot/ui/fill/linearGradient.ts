@@ -1,37 +1,8 @@
 import { CanvasRenderingContext2D } from "canvas";
-import { Component, Offset } from "./components/component";
-import { Color } from "../graphics/color";
-import { ColorResolvable, resolveColor } from "./types";
-import { BoxType } from "./style";
-
-export class Fill {
-    getCanvasFill(
-        ctx: CanvasRenderingContext2D, component: Component
-    ): any {
-        return "transparent"
-    }
-}
-
-export class SolidColorFill extends Fill {
-    public cssColor: string
-    constructor(
-        color: ColorResolvable
-    ) {
-        super()
-
-        this.cssColor = resolveColor(color)
-    }
-
-    getCanvasFill(
-        ctx: CanvasRenderingContext2D, component: Component
-    ): any {
-        return this.cssColor
-    }
-}
-
-export function SolidColor(color: ColorResolvable): SolidColorFill {
-    return new SolidColorFill(color)
-}
+import { Fill } from ".";
+import { Component, Offset } from "../components/component";
+import { resolveColor, ColorResolvable } from "../types";
+import { BoxType } from "../style";
 
 export class LinearGradientFill extends Fill {
     public stops: string[]

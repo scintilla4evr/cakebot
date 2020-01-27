@@ -7,9 +7,10 @@ import { IArgType } from "../../bot/commands/arguments";
 import { Rectangle } from "../../bot/ui/components/rectangle";
 import { UnboundedTextComponent, UnboundedText } from "../../bot/ui/components/unboundedText"
 import { renderComponent } from "../../bot/ui";
-import { LinearGradient } from "../../bot/ui/fill";
 import { pronounTemplate } from "../../bot/util/pronouns";
 import { Flex, FlexDirection, FlexAlignment, FlexJustification } from "../../bot/ui/components/flex";
+import { resolveUIImage } from "../../bot/ui/image";
+import { ImageFill } from "../../bot/ui/fill/image";
 
 class UITestCommand extends Command {
     constructor() {
@@ -25,6 +26,10 @@ class UITestCommand extends Command {
         message: Message,
         args: {}
     ) {
+        let image = await resolveUIImage(
+            "https://media.discordapp.net/attachments/671362186496442398/671421736230715397/unknown.png"
+        )
+
         let uiDefinition = Flex(
             332, 232,
             [
@@ -36,7 +41,7 @@ class UITestCommand extends Command {
         .flexDirection(FlexDirection.row)
         .flexAlignment(FlexAlignment.center)
         .flexJustification(FlexJustification.spaceBetween)
-        .fill("#fff")
+        .fill(new ImageFill(image))
 
         let buf = renderComponent(uiDefinition)
 
