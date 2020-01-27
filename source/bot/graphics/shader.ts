@@ -1,6 +1,6 @@
 import { Image } from "./image";
 import { Color } from "./color";
-import { lerp } from "../../util/lerp";
+import { lerp } from "../util/lerp";
 
 export type Shader = (
     image: Image,

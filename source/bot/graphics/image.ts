@@ -3,7 +3,7 @@ import Jimp = require("jimp");
 import { promisify } from "util";
 import { Shader } from "./shader";
 import { Color } from "./color";
-import { deepLerp } from "../../util/lerp";
+import { deepLerp } from "../util/lerp";
 
 export enum ImageWrapMethod {
     extendEdges, wrap, wrapSymmetric

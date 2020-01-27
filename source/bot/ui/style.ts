@@ -1,6 +1,7 @@
 import { Size, Offset, Component } from "./components/component"
 import { CanvasRenderingContext2D } from "canvas"
 import { Fill } from "./fill"
+import { resolveColor, ColorResolvable } from "./types"
 
 export type OutlineBounds = {
     left: number,
@@ -24,7 +25,7 @@ export type Shadow = {
     offsetX: number,
     offsetY: number,
     blur: number,
-    color: string
+    color: ColorResolvable
 }
 
 export class ComponentStyle {
@@ -42,11 +43,11 @@ export class ComponentStyle {
 
     setShadow(shadow: Shadow, ctx: CanvasRenderingContext2D) {
         ctx.shadowBlur = shadow.blur
-        ctx.shadowColor = shadow.color
+        ctx.shadowColor = resolveColor(shadow.color)
         ctx.shadowOffsetX = shadow.offsetX
         ctx.shadowOffsetY = shadow.offsetY
 
-        ctx.fillStyle = shadow.color
+        ctx.fillStyle = resolveColor(shadow.color)
     }
 
     drawContainer(ctx: CanvasRenderingContext2D, component: Component) {
@@ -60,6 +61,8 @@ export class ComponentStyle {
 
         let x = parentPos.x + boxOffset.x
         let y = parentPos.y + boxOffset.y
+        
+        ctx.save()
 
         ctx.beginPath()
         ctx.arc(
@@ -96,12 +99,16 @@ export class ComponentStyle {
         ctx.globalCompositeOperation = "source-over"
         ctx.fillStyle = this.fill.getCanvasFill(ctx, component)
         ctx.fill()
+
+        ctx.restore()
     }
 
     drawCustom(
         ctx: CanvasRenderingContext2D, component: Component,
         drawCallback: (ctx: CanvasRenderingContext2D, component: Component) => void
     ) {
+        ctx.save()
+
         ctx.globalCompositeOperation = "multiply"
         this.shadows.forEach(shadow => {
             this.setShadow(shadow, ctx)
@@ -111,6 +118,8 @@ export class ComponentStyle {
         ctx.globalCompositeOperation = "source-over"
         ctx.fillStyle = this.fill.getCanvasFill(ctx, component)
         drawCallback(ctx, component)
+
+        ctx.restore()
     }
 
     adjustSize(

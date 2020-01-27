@@ -33,6 +33,7 @@ export class UnitType implements IArgType {
 export class UnitConvertCommand extends Command {
     constructor() {
         super(
+            "cmd.units.convert",
             "convert",
             "$value:number $unitFrom:unit to $unitTo:unit"
         )

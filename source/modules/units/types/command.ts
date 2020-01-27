@@ -10,6 +10,7 @@ export class UnitCommand extends Command {
         public to: IUnit
     ) {
         super(
+            `cmd.units.${name}`,
             name,
             "$value:number"
         )

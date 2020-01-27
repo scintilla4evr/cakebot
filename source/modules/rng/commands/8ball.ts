@@ -1,7 +1,8 @@
 import { Command } from "../../../bot/commands/commands"
 import { Bot } from "../../../bot"
 import { Message } from "discord.js"
-import { pickRandom } from "../../../util/random"
+import { pickRandom } from "../../../bot/util/random"
+import { DocsCommandArgType } from "../../../bot/docs/types"
 
 export class EightBallCommand extends Command {
     public ballAnswers = [
@@ -29,8 +30,29 @@ export class EightBallCommand extends Command {
     constructor(
     ) {
         super(
+            "cmd.rng.8ball",
             "8ball",
-            ""
+            "",
+            {
+                description: "Provides a specific and on point yes/no answer to a question.",
+                parameters: [
+                    {
+                        name: "question",
+                        description: "The question you want to give to the ball.",
+                        type: DocsCommandArgType.string
+                    }
+                ],
+                usage: [
+                    {
+                        description: "Asking a simple question",
+                        syntax: "Is the sky blue?"
+                    },
+                    {
+                        description: "Complex queries",
+                        syntax: "Is the string theory an accurate description of the nature of the Universe?"
+                    }
+                ]
+            }
         )
     }
 

@@ -2,11 +2,12 @@
     "compilerOptions": {
         "rootDir": "source",
         "outDir": "build",
+        "allowJs": false,
 
-        "target": "ES6",
+        "target": "ES5",
         "experimentalDecorators": true,
 
-        "lib": ["ESNext"],
+        "lib": ["ESNext", "DOM"],
         
         "module": "CommonJS",
         "moduleResolution": "Node",

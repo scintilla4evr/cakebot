@@ -4,7 +4,7 @@ import { UnitCommand } from "./types/command";
 import { kelvin, fahrenheit, celsius } from "./units/temperature";
 import { UnitType, UnitConvertCommand } from "./convert";
 
-export function handler(bot: Bot) {
+export async function handler(bot: Bot) {
     bot.parser.register( 
         new UnitType()
     )

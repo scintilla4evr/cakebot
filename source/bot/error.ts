@@ -1,6 +1,8 @@
 export enum ErrorType {
     parserUnknownTypeAlias,
-    parserInvalidCommandSyntax
+    parserInvalidCommandSyntax,
+
+    commandAccessDenied
 }
 
 export class BotError extends Error {

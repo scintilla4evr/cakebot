@@ -1,12 +1,19 @@
 import { Color } from "../graphics/color";
-import { Fill, SolidFill } from "./fill";
+import { Fill, SolidColorFill } from "./fill";
 import { Component } from "./components/component";
+
+export type ColorResolvable = string | Color
+
+export function resolveColor(color: ColorResolvable): string {
+    if (color instanceof Color) return color.toCSSString()
+    return color
+}
 
 export type FillResolvable = string | Color | Fill
 
 export function resolveFill(fill: FillResolvable): Fill {
     if (fill instanceof Fill) return fill
-    return new SolidFill(fill)
+    return new SolidColorFill(fill)
 }
 
 export type ComponentListResolvable = Component | Component[]

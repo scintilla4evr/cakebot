@@ -1,4 +1,4 @@
-import { deepLerp } from "../util/lerp";
+import { deepLerp } from "../bot/util/lerp";
 import { Color } from "../bot/graphics/color";
 
 let out = new Color(0, 0, 0, 0)

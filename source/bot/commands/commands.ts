@@ -6,6 +6,7 @@ import {
 } from "discord.js"
 import {Bot} from ".."
 import { BotError, ErrorType } from "../error"
+import { DocsCommand } from "../docs/types"
 
 export async function processMessage(
     bot: Bot,
@@ -45,6 +46,10 @@ export async function processMessage(
                     `Invalid syntax.`
                 )
             }
+        } else if (e.type == ErrorType.commandAccessDenied) {
+            await message.channel.send(
+                "You don't have permissions to use this command."
+            )
         } else {
             console.log(e)
         }
@@ -55,8 +60,10 @@ export class Command {
     public permissionDeterminators: ((message: Message) => boolean)[] = []
 
     constructor(
+        public commandId: string,
         public name: string | RegExp,
-        public pattern: string
+        public pattern: string,
+        public docs?: DocsCommand
     ) {}
 
     public determinePermissions(
@@ -73,4 +80,14 @@ export class Command {
         message: Message,
         args: any
     ) {}
+}
+
+export class DevCommand extends Command {
+    public determinePermissions(
+        message: Message
+    ) {
+        if ("MAINTAINER_ID" in process.env && message.author.id !== process.env["MAINTAINER_ID"])
+            return false
+        return true
+    }
 }
