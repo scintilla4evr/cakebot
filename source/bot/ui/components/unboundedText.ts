@@ -51,37 +51,37 @@ export class UnboundedTextComponent extends Component {
         )
     }
 
-    margin(top = 0, right = 0, bottom = 0, left = 0): UnboundedTextComponent {
-        return super.margin(top, right, bottom, left) as UnboundedTextComponent
+    margin(top = 0, right = 0, bottom = 0, left = 0): this {
+        return super.margin(top, right, bottom, left)
     }
 
-    padding(top = 0, right = 0, bottom = 0, left = 0): UnboundedTextComponent {
-        return super.padding(top, right, bottom, left) as UnboundedTextComponent
+    padding(top = 0, right = 0, bottom = 0, left = 0): this {
+        return super.padding(top, right, bottom, left)
     }
 
-    borderRadius(upperLeft = 0, upperRight = 0, lowerRight = 0, lowerLeft = 0): UnboundedTextComponent {
-        return super.borderRadius(upperLeft, upperRight, lowerRight, lowerLeft) as UnboundedTextComponent
+    borderRadius(upperLeft = 0, upperRight = 0, lowerRight = 0, lowerLeft = 0): this {
+        return super.borderRadius(upperLeft, upperRight, lowerRight, lowerLeft)
     }
 
-    shadow(offsetX = 0, offsetY = 0, blur = 0, color = "transparent"): UnboundedTextComponent {
-        return super.shadow(offsetX, offsetY, blur, color) as UnboundedTextComponent
+    shadow(offsetX = 0, offsetY = 0, blur = 0, color = "transparent"): this {
+        return super.shadow(offsetX, offsetY, blur, color)
     }
 
-    fill(fill: FillResolvable): UnboundedTextComponent {
-        return super.fill(fill) as UnboundedTextComponent
+    fill(fill: FillResolvable): this {
+        return super.fill(fill)
     }
 
-    fontSize(size: number): UnboundedTextComponent {
+    fontSize(size: number): this {
         this._fontSize = size
         return this
     }
 
-    fontWeight(weight: FontWeight): UnboundedTextComponent {
+    fontWeight(weight: FontWeight): this {
         this._fontWeight = weight
         return this
     }
 
-    fontFamily(family: string): UnboundedTextComponent {
+    fontFamily(family: string): this {
         this._fontFamily = family
         return this
     }

@@ -9,6 +9,7 @@ import { UnboundedTextComponent, UnboundedText } from "../../bot/ui/components/u
 import { renderComponent } from "../../bot/ui";
 import { LinearGradient } from "../../bot/ui/fill";
 import { pronounTemplate } from "../../bot/util/pronouns";
+import { Flex, FlexDirection, FlexAlignment, FlexJustification } from "../../bot/ui/components/flex";
 
 class UITestCommand extends Command {
     constructor() {
@@ -24,19 +25,18 @@ class UITestCommand extends Command {
         message: Message,
         args: {}
     ) {
-        let uiDefinition = Rectangle(
+        let uiDefinition = Flex(
             332, 232,
             [
-                UnboundedText(
-                    "Welcome to the"
-                )
-                    .fill("#000"),
-                UnboundedText(
-                    "Bold Guess Club"
-                )
-                    .fill("red")
+                Rectangle(50, 50, []).fill("red"),
+                Rectangle(80, 30, []).fill("blue"),
+                Rectangle(10, 100, []).fill("green")
             ]
-        ).fill("#ddd")
+        )
+        .flexDirection(FlexDirection.row)
+        .flexAlignment(FlexAlignment.center)
+        .flexJustification(FlexJustification.spaceAround)
+        .fill("#fff")
 
         let buf = renderComponent(uiDefinition)
 

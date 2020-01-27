@@ -48,31 +48,31 @@ export class Component {
         }
     }
 
-    margin(top = 0, right = 0, bottom = 0, left = 0): Component {
+    margin(top = 0, right = 0, bottom = 0, left = 0): this {
         this.style.margin = {top, right, bottom, left}
         return this
     }
 
-    padding(top = 0, right = 0, bottom = 0, left = 0): Component {
+    padding(top = 0, right = 0, bottom = 0, left = 0): this {
         this.style.padding = {top, right, bottom, left}
         return this
     }
 
-    borderRadius(upperLeft = 0, upperRight = 0, lowerRight = 0, lowerLeft = 0): Component {
+    borderRadius(upperLeft = 0, upperRight = 0, lowerRight = 0, lowerLeft = 0): this {
         this.style.borderRadius = {
             upperLeft, upperRight, lowerRight, lowerLeft
         }
         return this
     }
 
-    shadow(offsetX = 0, offsetY = 0, blur = 0, color = "transparent"): Component {
+    shadow(offsetX = 0, offsetY = 0, blur = 0, color = "transparent"): this {
         this.style.shadows.push({
             offsetX, offsetY, blur, color
         })
         return this
     }
 
-    fill(fill: FillResolvable): Component {
+    fill(fill: FillResolvable): this {
         this.style.fill = resolveFill(fill)
         return this
     }

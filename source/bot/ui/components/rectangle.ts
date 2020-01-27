@@ -3,7 +3,7 @@ import { Component, Size, Offset } from "./component";
 import { BoxType } from "../style";
 import { ComponentListResolvable, resolveComponentList } from "../types";
 
-class RectangleComponent extends Component {
+export class RectangleComponent extends Component {
     public childrenOffsets: Offset[]
     public children: Component[]
 
