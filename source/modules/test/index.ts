@@ -35,7 +35,7 @@ class UITestCommand extends Command {
         )
         .flexDirection(FlexDirection.row)
         .flexAlignment(FlexAlignment.center)
-        .flexJustification(FlexJustification.spaceAround)
+        .flexJustification(FlexJustification.spaceBetween)
         .fill("#fff")
 
         let buf = renderComponent(uiDefinition)

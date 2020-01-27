@@ -9,7 +9,7 @@ export enum FlexDirection {
 }
 
 export enum FlexJustification {
-    flexStart, flexEnd, center, spaceAround, spaceEvenly
+    flexStart, flexEnd, center, spaceAround, spaceEvenly, spaceBetween
 }
 
 export enum FlexAlignment {
@@ -63,6 +63,8 @@ export class FlexComponent extends RectangleComponent {
                     y += (i + 1) * space / (this.children.length + 1)
                 } else if (this._flexJustification == FlexJustification.spaceAround) {
                     y += (2 * i + 1) * space / (2 * this.children.length)
+                } else if (this._flexJustification == FlexJustification.spaceBetween) {
+                    y += i * space / (this.children.length - 1)
                 }
 
                 yOffset += size.height
@@ -81,6 +83,8 @@ export class FlexComponent extends RectangleComponent {
                     x += (i + 1) * space / (this.children.length + 1)
                 } else if (this._flexJustification == FlexJustification.spaceAround) {
                     x += (2 * i + 1) * space / (2 * this.children.length)
+                } else if (this._flexJustification == FlexJustification.spaceBetween) {
+                    x += i * space / (this.children.length - 1)
                 }
 
                 xOffset += size.width
