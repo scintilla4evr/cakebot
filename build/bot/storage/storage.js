@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var postgres_1 = require("./postgres");
-var filesystem_1 = require("./filesystem");
+const postgres_1 = require("./postgres");
+const filesystem_1 = require("./filesystem");
 function setupStorage() {
     switch (process.env.STORAGE_TYPE) {
         case "postgres":

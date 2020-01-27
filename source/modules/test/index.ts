@@ -72,10 +72,32 @@ export class PronounTestCommand extends Command {
     }
 }
 
+export class ArgTestCommand extends Command {
+    constructor() {
+        super(
+            "cmd.test.argtest",
+            "arg",
+            "$guess:number $name:string"
+        )
+    }
+
+    async process(
+        bot: Bot,
+        message: Message,
+        args: {
+            guess: number,
+            name: string
+        }
+    ) {
+        console.log(args.guess, args.name)
+    }
+}
+
 export async function handler(bot: Bot) {
     bot.addCommand(
         new UITestCommand(),
-        new PronounTestCommand()
+        new PronounTestCommand(),
+        new ArgTestCommand()
     )
     console.log(2)
 }
