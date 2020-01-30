@@ -1,9 +1,10 @@
 import { Command } from "../../../../bot/commands/commands"
 import { DocsCommandArgType } from "../../../../bot/docs/types"
 import { Bot } from "../../../../bot"
-import { Message } from "discord.js"
+import { Message, Attachment } from "discord.js"
 import { LatePatState } from "../state"
 import { getNickname } from "../nicknames"
+import { LatePatClub } from "../clubs"
 
 export class LatePatGuessCommand extends Command {
     constructor(
@@ -55,8 +56,15 @@ export class LatePatGuessCommand extends Command {
             `:money_with_wings: ${nickname} guessed ${args.guess} minutes! :euro:`
         )
 
-        // clubs go here at some point idk
-
         await this.state.updateStorage()
+
+        let club = await LatePatClub.getClub(bot, args.guess)
+
+        if (club) {
+            let buffer = await club.renderCard(this.state.currentRound.guesses)
+            await message.channel.send(
+                new Attachment(buffer)
+            )
+        }
     }
 }

@@ -2,6 +2,8 @@ import { LatePatState } from "../state"
 import { Message } from "discord.js"
 import { Bot } from "../../../../bot"
 import { DevCommand } from "../../../../bot/commands/commands"
+import { LatePatClub } from "../clubs"
+import { getColorPalette } from "../../../../bot/apis/colormind"
 
 export class LatePatRoundStartCommand extends DevCommand {
     constructor(
@@ -72,5 +74,35 @@ export class LatePatRoundCheckCommand extends DevCommand {
         } else {
             await message.channel.send("no round")
         }
+    }
+}
+
+export class LatePatRoundClubCommand extends DevCommand {
+    constructor(
+        public state: LatePatState
+    ) {
+        super(
+            "cmd.latepat.club",
+            "d_club",
+            "$guess:number $name:string"
+        )
+    }
+
+    public async process(
+        bot: Bot,
+        message: Message,
+        args: {
+            guess: number,
+            name: string
+        }
+    ) {
+        let colors = await getColorPalette()
+        
+        let club = new LatePatClub(
+            args.guess, args.name,
+            colors[0], colors[2], colors[4]
+        )
+
+        await LatePatClub.addClub(bot, club)
     }
 }

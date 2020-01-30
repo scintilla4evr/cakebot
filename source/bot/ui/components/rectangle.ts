@@ -76,6 +76,11 @@ export class RectangleComponent extends Component {
             y: childOffset.y + parentPos.y + contentOffset.y
         }
     }
+
+    contractSize(): this {
+        this.height = this.children.reduce((acc, c) => acc += c.size.height, 0)
+        return this
+    }
 }
 
 export function Rectangle(
