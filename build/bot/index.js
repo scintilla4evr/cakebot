@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
-const commands_1 = require("./commands/commands");
 const parser_1 = require("./commands/arguments/parser");
 const logger_1 = require("./logger");
 const watcher_1 = require("./watcher");
+const processor_1 = require("./commands/processor");
 class Bot {
     constructor(apiKey, commandPrefix) {
         this.apiKey = apiKey;
@@ -30,7 +30,14 @@ class Bot {
                 this.logger.messageReceive(message);
                 if (message.author === this.client.user)
                     return;
-                commands_1.processMessage(this, message);
+                processor_1.processMessage(this, message);
+                this.watcher.process(message);
+            });
+            this.client.on("messageUpdate", (oldMessage, message) => {
+                this.logger.messageReceive(message);
+                if (message.author === this.client.user)
+                    return;
+                processor_1.processMessage(this, message, true);
                 this.watcher.process(message);
             });
             yield this.client.login(this.apiKey);

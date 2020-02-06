@@ -3,7 +3,7 @@ import {
 } from "discord.js"
 
 import {
-    Command, processMessage
+    Command
 } from "./commands/commands"
 import {
     IStorageHandler
@@ -12,6 +12,7 @@ import { ArgumentParser } from "./commands/arguments/parser"
 import { Logger } from "./logger"
 import { BoxType } from "./ui/style"
 import { MessageWatcher } from "./watcher"
+import { processMessage } from "./commands/processor"
 
 export class Bot {
     public client: Client
@@ -37,6 +38,14 @@ export class Bot {
 
             if (message.author === this.client.user) return
             processMessage(this, message)
+
+            this.watcher.process(message)
+        })
+        this.client.on("messageUpdate", (oldMessage, message) => {
+            this.logger.messageReceive(message)
+
+            if (message.author === this.client.user) return
+            processMessage(this, message, true)
 
             this.watcher.process(message)
         })

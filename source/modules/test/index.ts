@@ -1,4 +1,4 @@
-import { Command } from "../../bot/commands/commands";
+import { Command, EditableCommand } from "../../bot/commands/commands";
 import { Bot } from "../../bot";
 import { Message, Attachment } from "discord.js";
 import { Image } from "../../bot/graphics/image";
@@ -93,11 +93,32 @@ export class ArgTestCommand extends Command {
     }
 }
 
+export class EditableTestCommand extends EditableCommand {
+    constructor() {
+        super(
+            "cmd.test.edit",
+            "edit",
+            "$n:number"
+        )
+    }
+
+    async processEditable(
+        bot: Bot,
+        message: Message,
+        args: {
+            n: number
+        }
+    ): Promise<string> {
+        return (10 * args.n).toString()
+    }
+}
+
 export async function handler(bot: Bot) {
     bot.addCommand(
         new UITestCommand(),
         new PronounTestCommand(),
-        new ArgTestCommand()
+        new ArgTestCommand(),
+        new EditableTestCommand()
     )
     console.log(2)
 }

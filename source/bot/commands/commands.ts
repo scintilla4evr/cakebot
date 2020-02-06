@@ -8,54 +8,6 @@ import {Bot} from ".."
 import { BotError, ErrorType } from "../error"
 import { DocsCommand } from "../docs/types"
 
-export async function processMessage(
-    bot: Bot,
-    message: Message
-) {
-    let cmdName = message.content.trim().split(/\s/)[0]
-    if (!cmdName.startsWith(bot.commandPrefix)) return
-
-    let command = bot.commands.find(cmd => {
-        if (cmd.name instanceof RegExp)
-            return cmd.name.test(cmdName.substring(bot.commandPrefix.length))
-        else
-            return cmd.name.toLowerCase() === cmdName.substring(bot.commandPrefix.length).toLowerCase()
-    })
-
-    if (!command) return
-
-    try {
-        let args = bot.parser.parse(
-            message,
-            message.content.substring(cmdName.length).trim(),
-            command.pattern
-        )
-
-        if (command.determinePermissions(message))
-            await command.process(
-                bot, message, args
-            )
-    } catch(e) {
-        if (e.type == ErrorType.parserInvalidCommandSyntax) {
-            if ("HELP_URL" in process.env) {
-                await message.channel.send(
-                    `Invalid syntax. For info about the command, go to: ${process.env.HELP_URL}#${command.name}`
-                )
-            } else {
-                await message.channel.send(
-                    `Invalid syntax.`
-                )
-            }
-        } else if (e.type == ErrorType.commandAccessDenied) {
-            await message.channel.send(
-                "You don't have permissions to use this command."
-            )
-        } else {
-            console.log(e)
-        }
-    }
-}
-
 export class Command {
     public permissionDeterminators: ((message: Message) => boolean)[] = []
 
@@ -89,5 +41,15 @@ export class DevCommand extends Command {
         if ("MAINTAINER_ID" in process.env && message.author.id !== process.env["MAINTAINER_ID"])
             return false
         return true
+    }
+}
+
+export class EditableCommand extends Command {
+    public async processEditable(
+        bot: Bot,
+        message: Message,
+        args: any
+    ): Promise<string> {
+        return null
     }
 }
