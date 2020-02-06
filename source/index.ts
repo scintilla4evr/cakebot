@@ -1,8 +1,7 @@
-import { load } from "./loader"
-import { getStreamInfo } from "./bot/apis/youtube"
-import { getColorPalette } from "./bot/apis/colormind"
-import { Color } from "./bot/graphics/color"
+import { load, loadModules } from "./loader"
 
-
-let cake = load()
-cake.login()
+(async () => {
+    let bot = await load()
+    await bot.login()
+    await loadModules(bot)
+})()

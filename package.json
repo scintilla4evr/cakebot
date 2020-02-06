@@ -2,20 +2,24 @@
   "name": "carlin",
   "version": "3.0.0",
   "description": "CakeBot Carlin",
-  "main": "build/electron/index.js",
+  "main": "build/index.js",
   "scripts": {
-    "test": "tsc && copyfiles -u 1 \"./source/**/*.html\" build && copyfiles -u 1 \"./source/**/*.js\" build && sass source:build && electron .",
-    "build": "tsc && copyfiles -u 1 \"./source/**/*.html\" build && copyfiles -u 1 \"./source/**/*.js\" build && sass source:build",
-    "bot": "tsc && node ./build/"
+    "bot": "tsc && node -r source-map-support/register ./build/",
+    "docs": "tsc && node -r source-map-support/register ./build/docs"
   },
   "author": "scintilla4evr",
+  "repository": {
+    "url": "https://github.com/scintilla4evr/cakebot"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/dotenv-safe": "^8.1.0",
     "@types/node": "^12.7.2",
     "@types/node-fetch": "^2.5.4",
     "@types/pg": "^7.11.0",
-    "copyfiles": "^2.2.0"
+    "@types/showdown": "^1.9.3",
+    "copyfiles": "^2.2.0",
+    "source-map-support": "^0.5.16"
   },
   "dependencies": {
     "canvas": "^2.6.1",
@@ -24,6 +28,7 @@
     "jimp": "^0.9.3",
     "morse": "^0.1.0",
     "node-fetch": "^2.6.0",
-    "pg": "^7.12.1"
+    "pg": "^7.12.1",
+    "showdown": "^1.9.1"
   }
 }

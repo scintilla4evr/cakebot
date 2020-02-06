@@ -18,7 +18,7 @@ export class LatePatGuessCommand extends Command {
                 description: "Puts your guess in or modifies your previous guess in a LatePat guessing round.",
                 parameters: [
                     {
-                        name: "GUESS",
+                        name: "guess",
                         description: "Your guess, in minutes.",
                         type: DocsCommandArgType.number
                     }

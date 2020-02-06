@@ -4,7 +4,7 @@ import { Bot } from "./bot"
 import { setupStorage } from "./bot/storage/storage"
 import { registerFont } from "canvas"
 
-export function load(): Bot {
+export async function load(): Promise<Bot> {
     config({
         path: join(__dirname, "../.env")
     })
@@ -33,15 +33,18 @@ export function load(): Bot {
         }
     )
 
+    return cake
+}
+
+export async function loadModules(cake: Bot): Promise<void> {
     let commandFiles = process.env.BOT_MODULES.split(",").map(x => `modules/${x}`)
-    
-    commandFiles.forEach(f => {
-        let filePath = join(__dirname, f)
-        
-        import(filePath).then(async (mod) => {
+
+    await Promise.all(
+        commandFiles.map(async f => {
+            let filePath = join(__dirname, f)
+            let mod = await import(filePath)
+
             await mod.handler(cake)
         })
-    })
-
-    return cake
+    )
 }

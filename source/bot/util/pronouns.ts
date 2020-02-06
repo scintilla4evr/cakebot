@@ -1,22 +1,16 @@
 import { GuildMember } from "discord.js"
 
-export enum PronounForm {
-    subject = 1, object,
-    determiner, possessive,
-    reflexive
-}
-
 let heHimPronouns = ["he", "him", "his", "his", "himself"]
 let sheHerPronouns = ["she", "her", "her", "hers", "herself"]
 let theyThemPronouns = ["they", "them", "their", "theirs", "themself"]
 
-export function getPronounSets(member: GuildMember) {
+function getPronounSets(member: GuildMember) {
     let pronounRoles = ["He/Him", "She/Her", "They/Them"]
 
     return pronounRoles.filter(pronoun => member.roles.find(role => role.name == pronoun))
 }
 
-export function getPronouns(member: GuildMember): string[] {
+function getPronouns(member: GuildMember): string[] {
     let pronounSets: string[] = getPronounSets(member)
     let pronouns: string[]
 
@@ -39,7 +33,7 @@ export function getPronouns(member: GuildMember): string[] {
     return pronouns
 }
 
-export function casePreserveReplace(strFrom: string, strTo: string) {
+function casePreserveReplace(strFrom: string, strTo: string) {
     let upperCase = strFrom.split("").map(chr => chr === chr.toUpperCase())
 
     return strTo.split("").map(
@@ -47,7 +41,7 @@ export function casePreserveReplace(strFrom: string, strTo: string) {
     ).join("")
 }
 
-export function replacePronoun(str: string, pronouns: string[]): string {
+function replacePronoun(str: string, pronouns: string[]): string {
     let pronounIndex = theyThemPronouns.indexOf(str.toLowerCase())
 
     if (pronounIndex >= 0)
@@ -56,7 +50,7 @@ export function replacePronoun(str: string, pronouns: string[]): string {
     return str
 }
 
-export function replacePronouns(str: string, pronouns: string[]): string {
+function replacePronouns(str: string, pronouns: string[]): string {
     let out = ""
     let current = ""
 

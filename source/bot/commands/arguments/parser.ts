@@ -68,6 +68,28 @@ export class ArgumentParser {
         return output
     }
 
+    processRawPattern(pattern: string): (ArgumentTarget | string)[] {
+        return pattern.split(/\s/).map(str => {
+            let rx = /^\$([a-z_][a-z0-9_]*)(\??)\:([a-z_][a-z0-9_]*)(=[^\s]+)?$/i.exec(str)
+
+            if (rx) {
+                let type = this.types.find(type => type.alias === rx[3])
+                if (!type)
+                    throw new BotError(
+                        ErrorType.parserUnknownTypeAlias,
+                        `Unknown type alias: ${rx[3]}.`
+                    )
+
+                return {
+                    type, key: rx[1],
+                    optional: rx[2] === "?"
+                }
+            } else {
+                return str
+            }
+        })
+    }
+
     processPattern(message: Message, pattern: string): (ArgumentTarget | string)[] {
         return pattern.split(/\s/).map(str => {
             let rx = /^\$([a-z_][a-z0-9_]*)(\??)\:([a-z_][a-z0-9_]*)(=[^\s]+)?$/i.exec(str)
