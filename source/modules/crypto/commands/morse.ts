@@ -1,4 +1,4 @@
-import { Command } from "../../../bot/commands/commands";
+import { Command, EditableCommand } from "../../../bot/commands/commands";
 import { Bot } from "../../../bot";
 import { Message } from "discord.js";
 
@@ -7,7 +7,7 @@ let morse: {
     decode: (str: string, dichotomic?: boolean) => string
 } = require("morse")
 
-export class MorseCommand extends Command {
+export class MorseCommand extends EditableCommand {
     constructor() {
         super(
             "cmd.crypto.morse",
@@ -16,15 +16,13 @@ export class MorseCommand extends Command {
         )
     }
 
-    async process(
+    async processEditable(
         bot: Bot,
         message: Message,
         args: {
             str: string
         }
-    ) {
-        await message.channel.send(
-            morse.decode(args.str)
-        )
+    ): Promise<string> {
+        return morse.decode(args.str)
     }
 }

@@ -1,9 +1,9 @@
-import { Command } from "../../../bot/commands/commands";
+import { EditableCommand } from "../../../bot/commands/commands";
 import { Bot } from "../../../bot";
 import { Message } from "discord.js";
 import substitute from "../util/substitute";
 
-export class AtbashCommand extends Command {
+export class AtbashCommand extends EditableCommand {
     constructor() {
         super(
             "cmd.crypto.atbash",
@@ -12,18 +12,16 @@ export class AtbashCommand extends Command {
         )
     }
 
-    async process(
+    async processEditable(
         bot: Bot,
         message: Message,
         args: {
             str: string
         }
     ) {
-        await message.channel.send(
-            substitute(
-                args.str,
-                (letter: number) => 25 - letter
-            )
+        return substitute(
+            args.str,
+            (letter: number) => 25 - letter
         )
     }
 }

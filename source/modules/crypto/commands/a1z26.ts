@@ -1,5 +1,5 @@
 import alphabet from "../util/alphabet"
-import { Command } from "../../../bot/commands/commands"
+import { Command, EditableCommand } from "../../../bot/commands/commands"
 import { DocsCommandArgType } from "../../../bot/docs/types"
 import { Bot } from "../../../bot"
 import { Message } from "discord.js"
@@ -44,7 +44,7 @@ function a1z26(
         )
 }
 
-export class A1Z26Command extends Command {
+export class A1Z26Command extends EditableCommand {
     constructor() {
         super(
             "cmd.crypto.a1z26",
@@ -63,18 +63,16 @@ export class A1Z26Command extends Command {
         )
     }
 
-    async process(
+    async processEditable(
         bot: Bot,
         message: Message,
         args: {
             str: string
         }
-    ) {
+    ): Promise<string> {
         let results: string[] = []
         a1z26(results, args.str, "")
 
-        await message.channel.send(
-            results.map(s => `\`${s}\``).join(", ")
-        )
+        return results.map(s => `\`${s}\``).join(", ")
     }
 }
