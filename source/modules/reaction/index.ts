@@ -2,6 +2,7 @@ import { Bot } from "../../bot";
 import { Command } from "../../bot/commands/commands";
 import { Message, Attachment } from "discord.js";
 import { pickRandom } from "../../bot/util/random";
+import { TeaCommand } from "./tea";
 
 class ReactionImageCommand extends Command {
     public imageURLs: string[]
@@ -101,6 +102,8 @@ export async function handler(bot: Bot) {
             "https://cdn.discordapp.com/attachments/548251314573017098/607003773398941706/unknown.png"
         ),
 
-        new SinAlertCommand()
+        new SinAlertCommand(),
+
+        new TeaCommand()
     )
 }

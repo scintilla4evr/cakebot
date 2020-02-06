@@ -18,11 +18,13 @@ export async function processMessage(
     let cmdName = message.content.trim().split(/\s/)[0]
     if (!cmdName.startsWith(bot.commandPrefix)) return
 
+    cmdName = cmdName.substring(bot.commandPrefix.length)
+
     let command = bot.commands.find(cmd => {
         if (cmd.name instanceof RegExp)
-            return cmd.name.test(cmdName.substring(bot.commandPrefix.length))
+            return cmd.name.test(cmdName)
         else
-            return cmd.name.toLowerCase() === cmdName.substring(bot.commandPrefix.length).toLowerCase()
+            return cmd.name.toLowerCase() === cmdName.toLowerCase()
     })
 
     if (!command) return
@@ -30,7 +32,7 @@ export async function processMessage(
     try {
         let args = bot.parser.parse(
             message,
-            message.content.substring(cmdName.length).trim(),
+            message.content.substring(bot.commandPrefix.length + cmdName.length).trim(),
             command.pattern
         )
 
@@ -42,12 +44,12 @@ export async function processMessage(
                     item => item.sourceMessage == message
                 )
                 if (previousInvocation) {
-                    let newContent = await command.processEditable(bot, message, args)
+                    let newContent = await command.processEditable(bot, message, args, cmdName)
 
                     previousInvocation.targetMessage.edit(newContent)
                 } else {
                     let targetMessage = await message.channel.send(
-                        await command.processEditable(bot, message, args)
+                        await command.processEditable(bot, message, args, cmdName)
                     ) as Message
 
                     editableCommandHistory.push({
@@ -57,7 +59,7 @@ export async function processMessage(
                 }
             } else if (!isEdit) {
                 await command.process(
-                    bot, message, args
+                    bot, message, args, cmdName
                 )
             }
         }

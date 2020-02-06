@@ -46,13 +46,19 @@ export class Image {
         return await this._image.getBufferAsync(jimp.MIME_PNG)
     }
 
+    clone(): Image {
+        return new Image(
+            this._image.clone()
+        )
+    }
+
     shade(...shaders: Shader[]) {
         this._image.scan(
             0, 0, this.width, this.height,
             (x, y) => {
                 shaders.forEach(shader => {
                     let color = shader(
-                        this, x / this.width, y / this.height
+                        this, x, y
                     )
                     let jColor = color.toJimpStruct()
     
@@ -67,24 +73,27 @@ export class Image {
     }
 
     wrap(x: number, y: number, wrap: ImageWrapMethod = ImageWrapMethod.extendEdges) {
+        x /= this.width
+        y /= this.height
+
         switch (wrap) {
             case ImageWrapMethod.extendEdges:
                 return {
-                    x: Math.min(Math.max(x, 0), 1),
-                    y: Math.min(Math.max(y, 0), 1)
+                    x: Math.min(Math.max(x, 0), 1) * this.width,
+                    y: Math.min(Math.max(y, 0), 1) * this.height
                 }
             case ImageWrapMethod.wrapSymmetric:
                 return {
-                    x: 2 * Math.abs(x / 2 - Math.floor(x / 2 + 0.5)),
-                    y: 2 * Math.abs(y / 2 - Math.floor(y / 2 + 0.5))
+                    x: 2 * Math.abs(x / 2 - Math.floor(x / 2 + 0.5)) * this.width,
+                    y: 2 * Math.abs(y / 2 - Math.floor(y / 2 + 0.5)) * this.height
                 }
             default:
                 x = x % 1
                 y = y % 1
 
                 return {
-                    x: (x < 0) ? (x + 1) : x,
-                    y: (y < 0) ? (y + 1) : y
+                    x: ((x < 0) ? (x + 1) : x) * this.width,
+                    y: ((y < 0) ? (y + 1) : y) * this.height
                 }
         }
     }
@@ -97,31 +106,21 @@ export class Image {
         let {x, y} = this.wrap(fX, fY, wrap)
 
         switch (method) {
-            case ImageInterpolationMethod.bilinear:
-                let aX = x * this.width, aY = y * this.width
-
-                let xMin = Math.floor(aX), xMax = Math.ceil(aX)
-                let xLerp = aX - xMin
-
-                let yMin = Math.floor(aY), yMax = Math.ceil(aY)
-                let yLerp = aY - yMin
-
-                let ul = jimp.intToRGBA(this._image.getPixelColor(xMin, yMin))
-                let ur = jimp.intToRGBA(this._image.getPixelColor(xMax, yMin))
-                let ll = jimp.intToRGBA(this._image.getPixelColor(xMin, yMax))
-                let lr = jimp.intToRGBA(this._image.getPixelColor(xMax, yMax))
-
-                let u = {}, l = {}
-                deepLerp(xLerp, ul, ur, u)
-                deepLerp(xLerp, ll, lr, l)
-
-                let out = {r: 0, g: 0, b: 0, a: 0}
-                deepLerp(yLerp, u, l, out)
-
-                return Color.fromJimpStruct(out)
             default:
-                x = Math.floor(x * this.width)
-                y = Math.floor(y * this.height)
+                x = Math.max(
+                    Math.min(
+                        Math.round(x),
+                        this.width - 1
+                    ),
+                    0
+                )
+                y = Math.max(
+                    Math.min(
+                        Math.round(y),
+                        this.height - 1
+                    ),
+                    0
+                )
 
                 return Color.fromJimpStruct(
                     jimp.intToRGBA(

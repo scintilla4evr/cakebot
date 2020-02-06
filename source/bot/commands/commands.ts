@@ -30,7 +30,8 @@ export class Command {
     public async process(
         bot: Bot,
         message: Message,
-        args: any
+        args: any,
+        commandName?: string
     ) {}
 }
 
@@ -48,7 +49,8 @@ export class EditableCommand extends Command {
     public async processEditable(
         bot: Bot,
         message: Message,
-        args: any
+        args: any,
+        commandName?: string
     ): Promise<string> {
         return null
     }
