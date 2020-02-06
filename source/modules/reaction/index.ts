@@ -4,10 +4,12 @@ import { Message, Attachment } from "discord.js";
 import { pickRandom } from "../../bot/util/random";
 
 class ReactionImageCommand extends Command {
+    public imageURLs: string[]
+
     constructor(
         name: string,
         description: string,
-        public imageURL: string
+        imageURL: string | string[]
     ) {
         super(
             "cmd.reaction." + name,
@@ -17,6 +19,11 @@ class ReactionImageCommand extends Command {
                 parameters: []
             }
         )
+
+        if (imageURL instanceof Array)
+            this.imageURLs = imageURL
+        else
+            this.imageURLs = [imageURL]
     }
 
     async process(
@@ -24,7 +31,7 @@ class ReactionImageCommand extends Command {
     ) {
         await message.channel.send(
             new Attachment(
-                this.imageURL
+                pickRandom(this.imageURLs)
             )
         )
     }
@@ -77,6 +84,21 @@ export async function handler(bot: Bot) {
             "rulespray",
             "Ssss! You have been sprayed with the rule spray!",
             "https://cdn.discordapp.com/attachments/548467309103022101/599730990264614913/unknown.png"
+        ),
+        new ReactionImageCommand(
+            "reverse",
+            "no u",
+            [
+                "https://i.imgur.com/yXEiYQ4.jpg",
+                "https://i.imgur.com/CSuB3ZW.png",
+                "https://i.imgur.com/3WDcYbV.png",
+                "https://i.imgur.com/IxDEdxW.png"
+            ]
+        ),
+        new ReactionImageCommand(
+            "microwavecat",
+            "Microwave the cat!",
+            "https://cdn.discordapp.com/attachments/548251314573017098/607003773398941706/unknown.png"
         ),
 
         new SinAlertCommand()
