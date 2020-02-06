@@ -1,4 +1,5 @@
 import { GuildMember } from "discord.js"
+import mapCase from "./mapCase"
 
 let heHimPronouns = ["he", "him", "his", "his", "himself"]
 let sheHerPronouns = ["she", "her", "her", "hers", "herself"]
@@ -33,19 +34,11 @@ function getPronouns(member: GuildMember): string[] {
     return pronouns
 }
 
-function casePreserveReplace(strFrom: string, strTo: string) {
-    let upperCase = strFrom.split("").map(chr => chr === chr.toUpperCase())
-
-    return strTo.split("").map(
-        (chr, i) => (i < upperCase.length && upperCase[i]) ? chr.toUpperCase() : chr.toLowerCase()
-    ).join("")
-}
-
 function replacePronoun(str: string, pronouns: string[]): string {
     let pronounIndex = theyThemPronouns.indexOf(str.toLowerCase())
 
     if (pronounIndex >= 0)
-        str = casePreserveReplace(str, pronouns[pronounIndex])
+        str = mapCase(str, pronouns[pronounIndex])
 
     return str
 }
