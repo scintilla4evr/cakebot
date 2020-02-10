@@ -37,9 +37,15 @@ export class LatePatState {
         await this.bot.storage.set(latePatRoundsPath, this.rounds)
     }
 
+    forceEndAllRounds() {
+        this.rounds.forEach(round => round.active = false)
+    }
+
     async startRound(
         videoId: string
     ) {
+        this.forceEndAllRounds()
+        
         this.currentRound = new LatePatRound(videoId)
         this.currentRound.start(this.bot)
     

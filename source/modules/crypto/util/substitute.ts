@@ -7,15 +7,14 @@ export default function substitute(
 ): string {
     return [...str].map(chr => {
         if (!alphabet.includes(chr.toLowerCase())) return chr
-        return mapCase(
-            chr, 
-            alphabet[
-                subsitution(
-                    alphabet.indexOf(
-                        chr.toLowerCase()
-                    )
+        let newChr = alphabet[
+            subsitution(
+                alphabet.indexOf(
+                    chr.toLowerCase()
                 )
-            ]
-        )
+            )
+        ]
+        
+        return mapCase(chr, newChr)
     }).join("")
 }

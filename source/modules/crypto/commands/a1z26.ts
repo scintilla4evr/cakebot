@@ -51,12 +51,12 @@ export class A1Z26Command extends EditableCommand {
             "a1z26",
             "$str:string",
             {
-                description: "Decodes an A1Z26-encoded string of digits",
+                description: "Decodes an A1Z26-encoded string of digits.",
                 parameters: [
                     {
                         name: "str",
                         type: DocsCommandArgType.number,
-                        description: "The string of numbers"
+                        description: "A string of numbers"
                     }
                 ]
             }

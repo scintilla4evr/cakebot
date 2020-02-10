@@ -52,4 +52,10 @@ export class FileSystemStorage implements IStorageHandler {
         let dataPath = join(this.targetDirectory, StorageUtil.stringifyPath(path, "~"))
         await unlinkAsync(dataPath)
     }
+
+    public async list(
+        path: StoragePath
+    ) {
+        return []
+    }
 }

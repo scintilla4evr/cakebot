@@ -24,3 +24,15 @@ export class StringType implements IArgType {
         return str
     }
 }
+
+export class SingleStringType implements IArgType {
+    public alias = "singlestr"
+
+    isValid(str: string, length: number) {
+        return length === 1
+    }
+
+    parse(msg: Message, str: string): string {
+        return str
+    }
+}

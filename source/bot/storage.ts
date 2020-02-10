@@ -5,12 +5,18 @@ import {
 
 export type StoragePathItem = string | number | User | GuildMember | Guild | Channel
 export type StoragePath = StoragePathItem[]
+export type StorageItem = {
+    path: string[],
+    name: string
+    value: any
+}
 
 export interface IStorageHandler {
     get(path: StoragePath): Promise<any>
     set(path: StoragePath, value: any): Promise<void>
     exists(path: StoragePath): Promise<boolean>
     delete(path: StoragePath): Promise<void>
+    list(path: StoragePath): Promise<StorageItem[]>
 }
 
 export class StorageUtil {

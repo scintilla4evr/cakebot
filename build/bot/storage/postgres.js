@@ -61,6 +61,29 @@ class PostgresStorage {
             yield this.client.query(`DELETE FROM ${this.tableName} WHERE dataPath = $1`, [dataPath]);
         });
     }
+    list(path) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let out = [];
+            let startPath = storage_1.StorageUtil.stringifyPath(path) + "/";
+            let query = yield this.client.query(`
+            SELECT * FROM ${this.tableName}
+            WHERE (datapath LIKE $1)
+        `, [
+                startPath + "%"
+            ]);
+            query.rows.forEach(row => {
+                let fullPath = row.datapath.split("/");
+                if (fullPath.length > path.length + 1)
+                    return;
+                out.push({
+                    path: fullPath,
+                    name: fullPath[fullPath.length - 1],
+                    value: JSON.parse(row.contents)
+                });
+            });
+            return out;
+        });
+    }
 }
 exports.PostgresStorage = PostgresStorage;
 //# sourceMappingURL=postgres.js.map

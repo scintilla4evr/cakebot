@@ -1,6 +1,6 @@
 import {
     IStorageHandler,
-    StoragePath, StorageUtil
+    StoragePath, StorageUtil, StorageItem
 } from "../storage"
 import {Client} from "pg"
 
@@ -72,5 +72,31 @@ export class PostgresStorage implements IStorageHandler {
     ) {
         let dataPath = StorageUtil.stringifyPath(path)
         await this.client.query(`DELETE FROM ${this.tableName} WHERE dataPath = $1`, [dataPath])
+    }
+
+    public async list(
+        path: StoragePath
+    ): Promise<StorageItem[]> {
+        let out: StorageItem[] = []
+        let startPath = StorageUtil.stringifyPath(path) + "/"
+        let query = await this.client.query(`
+            SELECT * FROM ${this.tableName}
+            WHERE (datapath LIKE $1)
+        `, [
+            startPath + "%"
+        ])
+
+        query.rows.forEach(row => {
+            let fullPath = row.datapath.split("/")
+            if (fullPath.length > path.length + 1) return
+
+            out.push({
+                path: fullPath,
+                name: fullPath[fullPath.length - 1],
+                value: JSON.parse(row.contents)
+            })
+        })
+
+        return out
     }
 }

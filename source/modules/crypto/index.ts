@@ -6,6 +6,8 @@ import { Base64Command } from "./commands/base64";
 import { Rot13Command, RotNCommand, RotAllCommand } from "./commands/rot";
 import { FrequencyCommand } from "./commands/frequency";
 import { HexCommand } from "./commands/hex";
+import { BinaryCommand } from "./commands/binary";
+import { VigenereCommand } from "./commands/vigenere";
 
 export async function handler(bot: Bot) {
     bot.addCommand(
@@ -15,10 +17,12 @@ export async function handler(bot: Bot) {
 
         new Base64Command(),
         new HexCommand(),
+        new BinaryCommand(),
 
         new Rot13Command(),
         new RotNCommand(),
         new RotAllCommand(),
+        new VigenereCommand(),
 
         new FrequencyCommand()
     )

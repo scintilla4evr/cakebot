@@ -51,6 +51,11 @@ class FileSystemStorage {
             yield unlinkAsync(dataPath);
         });
     }
+    list(path) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return [];
+        });
+    }
 }
 exports.FileSystemStorage = FileSystemStorage;
 //# sourceMappingURL=filesystem.js.map

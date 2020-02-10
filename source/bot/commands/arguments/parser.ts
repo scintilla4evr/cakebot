@@ -1,6 +1,6 @@
 import { IArgType } from "."
 import { Message } from "discord.js"
-import { NumberType, StringType } from "./types/basic"
+import { NumberType, StringType, SingleStringType } from "./types/basic"
 import { type } from "os"
 import { BotError, ErrorType } from "../../error"
 
@@ -21,7 +21,9 @@ export class ArgumentParser {
     constructor() {
         this.register(
             new NumberType(),
-            new StringType()
+
+            new StringType(),
+            new SingleStringType()
         )
     }
 
@@ -142,7 +144,7 @@ export class ArgumentParser {
                     if (item.type instanceof StringType) {
                         output[item.key] = item.type.parse(message, argv.join(" "))
                         break
-                    } else if (item.type.isValid(joinedString)) {
+                    } else if (item.type.isValid(joinedString, i + 1)) {
                         output[item.key] = item.type.parse(message, joinedString)
                         
                         argv.splice(0, i + 1)

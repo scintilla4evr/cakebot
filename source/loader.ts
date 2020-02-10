@@ -45,6 +45,10 @@ export async function loadModules(cake: Bot): Promise<void> {
             let mod = await import(filePath)
 
             await mod.handler(cake)
+
+            console.info(
+                `Loaded ${f}.`
+            )
         })
     )
 }

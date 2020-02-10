@@ -2,13 +2,24 @@ import { EditableCommand } from "../../../bot/commands/commands";
 import { Bot } from "../../../bot";
 import { Message } from "discord.js";
 import substitute from "../util/substitute";
+import { DocsCommandArgType } from "../../../bot/docs/types";
 
 export class AtbashCommand extends EditableCommand {
     constructor() {
         super(
             "cmd.crypto.atbash",
             "atbash",
-            "$str:string"
+            "$str:string",
+            {
+                description: "Decodes an Atbash-encoded string.",
+                parameters: [
+                    {
+                        name: "str",
+                        type: DocsCommandArgType.string,
+                        description: "A text string"
+                    }
+                ]
+            }
         )
     }
 
