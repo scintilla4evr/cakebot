@@ -14,6 +14,7 @@ const parser_1 = require("./commands/arguments/parser");
 const logger_1 = require("./logger");
 const watcher_1 = require("./watcher");
 const processor_1 = require("./commands/processor");
+const conversation_1 = require("./conversation");
 class Bot {
     constructor(apiKey, commandPrefix) {
         this.apiKey = apiKey;
@@ -26,13 +27,15 @@ class Bot {
     login() {
         return __awaiter(this, void 0, void 0, function* () {
             this.client = new discord_js_1.Client();
-            this.client.on("message", (message) => {
+            this.client.on("message", (message) => __awaiter(this, void 0, void 0, function* () {
                 this.logger.messageReceive(message);
                 if (message.author === this.client.user)
                     return;
-                processor_1.processMessage(this, message);
-                this.watcher.process(message);
-            });
+                if (yield conversation_1.processConversations(this, message))
+                    return;
+                yield processor_1.processMessage(this, message);
+                yield this.watcher.process(message);
+            }));
             this.client.on("messageUpdate", (oldMessage, message) => {
                 this.logger.messageReceive(message);
                 if (message.author === this.client.user)
@@ -54,6 +57,11 @@ class Bot {
             if (index >= 0)
                 this.commands.splice(index, 1);
             this.commands.push(command);
+        });
+    }
+    startConversation(channel, user, handler) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield conversation_1.startConversation(this, channel, user, handler);
         });
     }
     markChannel(channel, marker) {

@@ -1,5 +1,5 @@
 import {
-    Client, Channel
+    Client, Channel, TextChannel, User
 } from "discord.js"
 
 import {
@@ -13,7 +13,8 @@ import { Logger } from "./logger"
 import { BoxType } from "./ui/style"
 import { MessageWatcher } from "./watcher"
 import { processMessage } from "./commands/processor"
-import { processConversations } from "./conversation"
+import { processConversations, IConversationHandler, startConversation, Conversation } from "./conversation"
+import { start } from "repl"
 
 export class Bot {
     public client: Client
@@ -68,6 +69,15 @@ export class Bot {
 
             this.commands.push(command)
         })
+    }
+
+    public async startConversation(
+        channel: TextChannel, user: User,
+        handler: IConversationHandler
+    ): Promise<Conversation> {
+        return await startConversation(
+            this, channel, user, handler
+        )
     }
 
     async markChannel(channel: Channel, marker: string) {

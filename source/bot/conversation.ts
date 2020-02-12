@@ -16,7 +16,7 @@ export interface IConversationHandler {
     ) => Promise<void>
 }
 
-class Conversation {
+export class Conversation {
     constructor(
         public bot: Bot,
         public channel: TextChannel,
