@@ -1,6 +1,6 @@
 import { Size, Offset, Component } from "./components/component"
 import { CanvasRenderingContext2D } from "canvas"
-import { Fill } from "./fill/"
+import { Fill, FreeformFill } from "./fill/"
 import { resolveColor, ColorResolvable } from "./types"
 
 export type OutlineBounds = {
@@ -97,8 +97,9 @@ export class ComponentStyle {
         })
 
         ctx.globalCompositeOperation = "source-over"
-        ctx.fillStyle = this.fill.getCanvasFill(ctx, component)
-        ctx.fill()
+        ctx.clip()
+
+        this.fill.renderFill(ctx, component)
 
         ctx.restore()
     }
@@ -116,7 +117,13 @@ export class ComponentStyle {
         })
 
         ctx.globalCompositeOperation = "source-over"
-        ctx.fillStyle = this.fill.getCanvasFill(ctx, component)
+
+        if (this.fill instanceof FreeformFill) {
+            ctx.fillStyle = this.fill.getCanvasFill(ctx, component)
+        } else {
+            ctx.fillStyle = "#000"
+        }
+
         drawCallback(ctx, component)
 
         ctx.restore()

@@ -42,15 +42,10 @@ export class ImageFill extends Fill {
             width: w, height: h
         }
     }
-
-    getCanvasFill(
+    
+    renderFill(
         ctx: CanvasRenderingContext2D, component: Component
-    ): any {
-        let fillCanvas = createCanvas(
-            ctx.canvas.width, ctx.canvas.height
-        )
-        let fillCanvasCtx = fillCanvas.getContext("2d")
-
+    ): void {
         let imagePos: Offset, imageSize: Size
 
         if (this.attachment == ImageAttachment.component) {
@@ -80,14 +75,10 @@ export class ImageFill extends Fill {
             }
         }
 
-        fillCanvasCtx.drawImage(
+        ctx.drawImage(
             this.image.image,
             imagePos.x, imagePos.y,
             imageSize.width, imageSize.height
         )
-
-        let pattern = ctx.createPattern(fillCanvas)
-
-        return pattern
     }
 }

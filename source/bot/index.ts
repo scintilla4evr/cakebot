@@ -13,6 +13,7 @@ import { Logger } from "./logger"
 import { BoxType } from "./ui/style"
 import { MessageWatcher } from "./watcher"
 import { processMessage } from "./commands/processor"
+import { processConversations } from "./conversation"
 
 export class Bot {
     public client: Client
@@ -33,13 +34,16 @@ export class Bot {
     async login() {
         this.client = new Client()
 
-        this.client.on("message", (message) => {
+        this.client.on("message", async (message) => {
             this.logger.messageReceive(message)
 
             if (message.author === this.client.user) return
-            processMessage(this, message)
 
-            this.watcher.process(message)
+            if (await processConversations(this, message)) return
+
+            await processMessage(this, message)
+
+            await this.watcher.process(message)
         })
         this.client.on("messageUpdate", (oldMessage, message) => {
             this.logger.messageReceive(message)

@@ -1,10 +1,10 @@
 import { CanvasRenderingContext2D } from "canvas";
-import { Fill } from ".";
+import { Fill, FreeformFill } from ".";
 import { Component, Offset } from "../components/component";
 import { resolveColor, ColorResolvable } from "../types";
 import { BoxType } from "../style";
 
-export class LinearGradientFill extends Fill {
+export class LinearGradientFill extends FreeformFill {
     public stops: string[]
     constructor(
         colors: ColorResolvable[],

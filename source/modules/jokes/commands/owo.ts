@@ -41,7 +41,10 @@ export class OwoCommand extends EditableCommand {
         let newStr = args.str
 
         Object.keys(this.replacements).forEach(src => {
-            newStr = newStr.replace(src, this.replacements[src])
+            newStr = newStr.replace(
+                new RegExp(src, "g"),
+                this.replacements[src]
+            )
         })
 
         return newStr

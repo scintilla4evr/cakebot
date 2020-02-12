@@ -5,28 +5,6 @@ import { DevCommand } from "../../../../bot/commands/commands"
 import { LatePatClub } from "../clubs"
 import { getColorPalette } from "../../../../bot/apis/colormind"
 
-export class LatePatRoundStartCommand extends DevCommand {
-    constructor(
-        public state: LatePatState
-    ) {
-        super(
-            "cmd.latepat.start",
-            "d_latepatstart",
-            "$videoId:string"
-        )
-    }
-
-    public async process(
-        bot: Bot,
-        message: Message,
-        args: {
-            videoId: string
-        }
-    ) {
-        await this.state.startRound(args.videoId)
-    }
-}
-
 export class LatePatRoundEndCommand extends DevCommand {
     constructor(
         public state: LatePatState
@@ -45,7 +23,7 @@ export class LatePatRoundEndCommand extends DevCommand {
             outcome: number
         }
     ) {
-        this.state.currentRound.finish(args.outcome)
+        this.state.finishRound(args.outcome)
 
         await this.state.updateStorage()
     }

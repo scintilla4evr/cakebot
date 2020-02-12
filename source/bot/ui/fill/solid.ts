@@ -1,9 +1,9 @@
 import { CanvasRenderingContext2D } from "canvas";
-import { Fill } from ".";
+import { Fill, FreeformFill } from ".";
 import { Component } from "../components/component";
 import { resolveColor, ColorResolvable } from "../types";
 
-export class SolidColorFill extends Fill {
+export class SolidColorFill extends FreeformFill {
     public cssColor: string
     constructor(
         color: ColorResolvable

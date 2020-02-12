@@ -2,7 +2,7 @@ import { Bot } from "../../bot";
 import { LatePatLinkDetector } from "./src/watcher";
 import { getStreamInfo } from "../../bot/apis/youtube";
 import { LatePatState } from "./src/state";
-import { LatePatRoundStartCommand, LatePatRoundEndCommand, LatePatRoundCheckCommand, LatePatRoundClubCommand } from "./src/commands/dev";
+import { LatePatRoundEndCommand, LatePatRoundCheckCommand, LatePatRoundClubCommand } from "./src/commands/dev";
 import { LatePatGuessCommand } from "./src/commands/guess";
 import { LatePatGuessesCommand } from "./src/commands/guesses";
 import { TextChannel } from "discord.js";
@@ -22,12 +22,11 @@ export async function handler(bot: Bot) {
         let streamInfo = await getStreamInfo(videoId)
 
         if (streamInfo.liveStream) {
-            await latePatState.startRound(videoId)
+            await latePatState.startRound(streamInfo.video)
         }
     })
 
     bot.addCommand(
-        new LatePatRoundStartCommand(latePatState),
         new LatePatRoundEndCommand(latePatState),
         new LatePatRoundCheckCommand(latePatState),
         new LatePatRoundClubCommand(latePatState),
