@@ -64,6 +64,9 @@ class Bot {
             return yield conversation_1.startConversation(this, channel, user, handler);
         });
     }
+    endConversation(channel, user) {
+        conversation_1.endConversation(channel, user);
+    }
     markChannel(channel, marker) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.storage.set(["meta", "markedChannels", marker], channel.id);

@@ -3,6 +3,10 @@ import { Message, TextChannel, User } from "discord.js";
 
 let ongoingConversations: Conversation[] = []
 
+export interface IConversationHandlerCtor {
+    new (): IConversationHandler
+}
+
 export interface IConversationHandler {
     start: (
         bot: Bot, conversation: Conversation
@@ -31,9 +35,20 @@ export class Conversation {
     }
 }
 
+export function endConversation(
+    channel: TextChannel, user: User
+) {
+    let prevConvo = ongoingConversations.findIndex(
+        c => c.channel === channel && c.user === user
+    )
+    if (prevConvo >= 0) ongoingConversations.splice(prevConvo, 1)
+}
+
 export async function startConversation(
     bot: Bot, channel: TextChannel, user: User, handler: IConversationHandler
 ): Promise<Conversation> {
+    endConversation(channel, user)
+
     let convo = new Conversation(bot, channel, user, handler)
     ongoingConversations.push(convo)
 

@@ -13,7 +13,7 @@ import { Logger } from "./logger"
 import { BoxType } from "./ui/style"
 import { MessageWatcher } from "./watcher"
 import { processMessage } from "./commands/processor"
-import { processConversations, IConversationHandler, startConversation, Conversation } from "./conversation"
+import { processConversations, IConversationHandler, startConversation, Conversation, endConversation } from "./conversation"
 import { start } from "repl"
 
 export class Bot {
@@ -78,6 +78,12 @@ export class Bot {
         return await startConversation(
             this, channel, user, handler
         )
+    }
+
+    public endConversation(
+        channel: TextChannel, user: User
+    ) {
+        endConversation(channel, user)
     }
 
     async markChannel(channel: Channel, marker: string) {

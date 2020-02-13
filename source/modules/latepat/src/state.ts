@@ -1,7 +1,7 @@
 import { TextChannel } from "discord.js";
 import { LatePatRoundStruct, LatePatRound, LatePatGuess } from "./late";
 import { Bot } from "../../../bot";
-import { YTVideoDetails } from "../../../bot/apis/youtube";
+import { YTVideoDetails, getStreamInfo } from "../../../bot/apis/youtube";
 import { extractGameFromVideoTitle } from "../../../bot/apis/gtlive";
 import { dedent } from "../../../bot/util/dedent";
 import { pickRandom } from "../../../bot/util/random";
@@ -14,6 +14,8 @@ export class LatePatState {
 
     public currentRound: LatePatRound
 
+    public currentInterval: NodeJS.Timeout
+
     constructor(
         public bot: Bot,
         public channel: TextChannel
@@ -25,10 +27,12 @@ export class LatePatState {
 
         this.rounds = await this.bot.storage.get(latePatRoundsPath)
 
-        if (this.rounds.find(r => r.active))
+        if (this.rounds.find(r => r.active)) {
             this.currentRound = LatePatRound.fromJson(
                 this.bot, this.rounds.find(r => r.active)
             )
+            this.startWatchingForLaunch(this.currentRound.videoId)
+        }
     }
 
     async updateStorage() {
@@ -68,7 +72,35 @@ export class LatePatState {
 
             **How to play?**
             ${instructions}`
-        )}
+        )
+    }
+
+    startWatchingForLaunch(
+        videoId: string
+    ) {
+        this.currentInterval = setInterval(
+            async () => {
+                if (!this.currentRound || !this.currentRound.active) return this.stopWatching()
+
+                let streamInfo = await getStreamInfo(videoId)
+
+                if (
+                    streamInfo.liveStream &&
+                    streamInfo.startTime
+                ) {
+                    let outcome = streamInfo.startDelay / 1000 / 60
+
+                    await this.finishRound(outcome)
+                }
+            },
+            15 * 1000
+        )
+    }
+
+    stopWatching() {
+        clearInterval(this.currentInterval)
+        this.currentInterval = null
+    }
 
     async startRound(
         video: YTVideoDetails
@@ -80,6 +112,7 @@ export class LatePatState {
         
         this.currentRound = new LatePatRound(video.videoId)
         this.currentRound.start(this.bot)
+        this.startWatchingForLaunch(video.videoId)
     
         await this.updateStorage()
     
@@ -91,7 +124,7 @@ export class LatePatState {
         outcome: number
     ) {
         let message = ""
-        let delta = Math.abs(60 * (outcome - winners[0].guess)).toPrecision(2)
+        let delta = Math.abs(60 * (outcome - winners[0].guess)).toFixed(2)
 
         if (winners.length === 1) {
             let member = this.channel.guild.members.find(m => m.user == winners[0].user)
@@ -122,6 +155,7 @@ export class LatePatState {
         if (!this.currentRound || !this.currentRound.active) return
 
         let winners = this.currentRound.finish(outcome)
+        this.stopWatching()
 
         await this.updateStorage()
 
