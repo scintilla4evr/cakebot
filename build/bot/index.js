@@ -34,14 +34,14 @@ class Bot {
                 if (yield conversation_1.processConversations(this, message))
                     return;
                 yield processor_1.processMessage(this, message);
-                yield this.watcher.process(message);
+                yield this.watcher.process(message, false);
             }));
             this.client.on("messageUpdate", (oldMessage, message) => {
                 this.logger.messageReceive(message);
                 if (message.author === this.client.user)
                     return;
                 processor_1.processMessage(this, message, true);
-                this.watcher.process(message);
+                this.watcher.process(message, true);
             });
             yield this.client.login(this.apiKey);
         });

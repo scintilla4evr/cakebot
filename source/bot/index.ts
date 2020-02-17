@@ -44,7 +44,7 @@ export class Bot {
 
             await processMessage(this, message)
 
-            await this.watcher.process(message)
+            await this.watcher.process(message, false)
         })
         this.client.on("messageUpdate", (oldMessage, message) => {
             this.logger.messageReceive(message)
@@ -52,7 +52,7 @@ export class Bot {
             if (message.author === this.client.user) return
             processMessage(this, message, true)
 
-            this.watcher.process(message)
+            this.watcher.process(message, true)
         })
 
         await this.client.login(this.apiKey)

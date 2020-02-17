@@ -26,12 +26,12 @@ export class HangmanGame implements IConversationHandler {
     ) {
         let word = [...this.currentWord].map(chr => {
             if (chr === " ") return ":black_small_square:"
-            else if (chr === "_") return ":black_large_square:"
+            else if (chr === "_") return "<:HangmanQuestion:677587792750051353>"
 
             return `:regional_indicator_${chr}:`
         }).join(" ")
         let lives = ":heart: ".repeat(this.lives) + 
-                    ":black_heart: ".repeat(6 - this.lives)
+                    "<:HangmanHeart:677617020098838551> ".repeat(6 - this.lives)
 
         await channel.send(
             dedent`**Word:** ${word}
