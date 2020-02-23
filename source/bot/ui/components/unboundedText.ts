@@ -7,6 +7,7 @@ export class UnboundedTextComponent extends Component {
     public _fontFamily = "DefaultSansSerif"
     public _fontWeight: FontWeight = FontWeight.normal
     public _fontSize = 16
+    public _lineHeight = 1
 
     constructor(
         public text: string
@@ -23,7 +24,9 @@ export class UnboundedTextComponent extends Component {
 
         return {
             width: measurement.width,
-            height: measurement.actualBoundingBoxDescent - measurement.actualBoundingBoxAscent
+            height: (
+                measurement.actualBoundingBoxDescent - measurement.actualBoundingBoxAscent
+            ) * this._lineHeight
         }
     }
 
@@ -83,6 +86,11 @@ export class UnboundedTextComponent extends Component {
 
     fontFamily(family: string): this {
         this._fontFamily = family
+        return this
+    }
+
+    lineHeight(height: number): this {
+        this._lineHeight = height
         return this
     }
 }

@@ -4,6 +4,65 @@ import { Bot } from "./bot"
 import { setupStorage } from "./bot/storage/storage"
 import { registerFont } from "canvas"
 
+function loadFonts() {
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-ExtraLight-BETA.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "100"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-Thin-BETA.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "200"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-Light-BETA.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "300"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-Regular.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "400"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-Medium.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "500"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-SemiBold.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "600"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-Bold.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "700"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-Black.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "800"
+        }
+    )
+}
+
 export async function load(): Promise<Bot> {
     config({
         path: join(__dirname, "../.env")
@@ -18,20 +77,7 @@ export async function load(): Promise<Bot> {
     cake.storage = setupStorage()
     
     // Fonts
-    registerFont(
-        join(__dirname, "../assets/fonts/sans/Inter-Regular.ttf"),
-        {
-            family: "DefaultSansSerif",
-            weight: "400"
-        }
-    )
-    registerFont(
-        join(__dirname, "../assets/fonts/sans/Inter-Bold.ttf"),
-        {
-            family: "DefaultSansSerif",
-            weight: "700"
-        }
-    )
+    loadFonts()
 
     return cake
 }
