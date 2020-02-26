@@ -46,20 +46,13 @@ export class RectangleComponent extends Component {
     }
 
     render(ctx: CanvasRenderingContext2D) {
-        let parentOffset = this.parent?.getChildPosition(this) ?? {
-            x: 0, y: 0
-        }
-
-        let boxOffset = this.style.getOffset(BoxType.containerBox)
-        let boxSize = this.style.adjustSize(
-            this.contentSize, BoxType.containerBox
-        )
-
         this.style.drawContainer(ctx, this)
 
         this.children.forEach(child => {
             child.render(ctx)
         })
+
+        this.renderDebug(ctx)
     }
 
     getChildPosition(child: Component): Offset {
@@ -72,7 +65,7 @@ export class RectangleComponent extends Component {
         let contentOffset = this.style.getOffset(BoxType.contentBox)
 
         return {
-            x: childOffset.x + parentPos.x + contentOffset.y,
+            x: childOffset.x + parentPos.x + contentOffset.x,
             y: childOffset.y + parentPos.y + contentOffset.y
         }
     }

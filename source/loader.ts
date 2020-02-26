@@ -13,10 +13,26 @@ function loadFonts() {
         }
     )
     registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-ExtraLightItalic-BETA.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "100",
+            style: "italic"
+        }
+    )
+    registerFont(
         join(__dirname, "../assets/fonts/sans/Inter-Thin-BETA.ttf"),
         {
             family: "DefaultSansSerif",
             weight: "200"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-ThinItalic-BETA.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "200",
+            style: "italic"
         }
     )
     registerFont(
@@ -27,10 +43,26 @@ function loadFonts() {
         }
     )
     registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-LightItalic-BETA.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "300",
+            style: "italic"
+        }
+    )
+    registerFont(
         join(__dirname, "../assets/fonts/sans/Inter-Regular.ttf"),
         {
             family: "DefaultSansSerif",
             weight: "400"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-Italic.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "400",
+            style: "italic"
         }
     )
     registerFont(
@@ -41,10 +73,26 @@ function loadFonts() {
         }
     )
     registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-MediumItalic.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "500",
+            style: "italic"
+        }
+    )
+    registerFont(
         join(__dirname, "../assets/fonts/sans/Inter-SemiBold.ttf"),
         {
             family: "DefaultSansSerif",
             weight: "600"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-SemiBoldItalic.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "600",
+            style: "italic"
         }
     )
     registerFont(
@@ -55,10 +103,26 @@ function loadFonts() {
         }
     )
     registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-BoldItalic.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "700",
+            style: "italic"
+        }
+    )
+    registerFont(
         join(__dirname, "../assets/fonts/sans/Inter-Black.ttf"),
         {
             family: "DefaultSansSerif",
             weight: "800"
+        }
+    )
+    registerFont(
+        join(__dirname, "../assets/fonts/sans/Inter-BlackItalic.ttf"),
+        {
+            family: "DefaultSansSerif",
+            weight: "800",
+            style: "italic"
         }
     )
 }

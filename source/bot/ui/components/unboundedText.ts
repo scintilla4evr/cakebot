@@ -7,6 +7,7 @@ export class UnboundedTextComponent extends Component {
     public _fontFamily = "DefaultSansSerif"
     public _fontWeight: FontWeight = FontWeight.normal
     public _fontSize = 16
+    public _fontStyle = "normal"
     public _lineHeight = 1
 
     constructor(
@@ -31,7 +32,7 @@ export class UnboundedTextComponent extends Component {
     }
 
     setContextStyle(ctx: CanvasRenderingContext2D) {
-        ctx.font = `${this._fontWeight} ${this._fontSize}px "${this._fontFamily}"`
+        ctx.font = `${this._fontStyle} ${this._fontWeight} ${this._fontSize}px "${this._fontFamily}"`
         ctx.textBaseline = "top"
     }
 
@@ -52,6 +53,8 @@ export class UnboundedTextComponent extends Component {
                 )
             }
         )
+
+        this.renderDebug(ctx)
     }
 
     margin(top = 0, right = 0, bottom = 0, left = 0): this {
@@ -86,6 +89,11 @@ export class UnboundedTextComponent extends Component {
 
     fontFamily(family: string): this {
         this._fontFamily = family
+        return this
+    }
+
+    fontStyle(style: string): this {
+        this._fontStyle = style
         return this
     }
 

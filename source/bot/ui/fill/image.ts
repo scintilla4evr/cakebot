@@ -26,10 +26,11 @@ export class ImageFill extends Fill {
         let w = this.image.image.width
         let h = this.image.image.height
         let aspectRatio = w / h
+        const targetRatio = target.width / target.height
 
         if (this.size == ImageSize.stretch) return target
         else if (this.size == ImageSize.cover) {
-            if (aspectRatio > 1) {
+            if (aspectRatio > targetRatio) {
                 w = target.height * aspectRatio
                 h = target.height
             } else {

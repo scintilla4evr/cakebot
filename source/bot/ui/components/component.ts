@@ -36,6 +36,27 @@ export class Component {
 
     render(context: CanvasRenderingContext2D) {}
 
+    renderDebug(context: CanvasRenderingContext2D) {
+        if (true) return // Just for fun
+        
+        const parentOffset = this.parent?.getChildPosition(this) ?? {
+            x: 0, y: 0
+        }
+
+        const boxOffset = this.style.getOffset(BoxType.containerBox)
+        const boxSize = this.style.adjustSize(
+            this.contentSize, BoxType.containerBox
+        )
+
+        context.strokeStyle = "#f0f"
+        context.lineWidth = 1
+        context.strokeRect(
+            parentOffset.x + boxOffset.x,
+            parentOffset.y + boxOffset.y,
+            boxSize.width, boxSize.height
+        )
+    }
+
     getChildPosition(child: Component): Offset {
         let parentPos = this.parent?.getChildPosition(this) ?? {
             x: 0, y: 0
