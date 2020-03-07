@@ -74,7 +74,11 @@ class Bot {
     }
     getMarkedChannel(marker) {
         return __awaiter(this, void 0, void 0, function* () {
-            let path = ["meta", "markedChannels", marker];
+            const env = `OVERRIDE_${marker.toUpperCase()}`;
+            if (env in process.env) {
+                return this.client.channels.find(c => c.id === process.env[env]);
+            }
+            const path = ["meta", "markedChannels", marker];
             if (!(yield this.storage.exists(path)))
                 return null;
             let id = yield this.storage.get(path);

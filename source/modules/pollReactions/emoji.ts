@@ -25,8 +25,9 @@ function processLine(
         }
     )
 
-    if (line.endsWith(uniEmote))
-        return uniEmote
+    // if (line.endsWith(uniEmote))
+    //     return uniEmote
+    if (uniEmote) return uniEmote
 
     // Discord
     const customRegex = /^.*\<a?\:[a-z_]+\:([0-9]+)\>$/i
@@ -48,7 +49,9 @@ export function extractPollEmojis(
 
     lines.forEach(line => {
         const emote = processLine(
-            line.trim(),
+            line.replace(
+                new RegExp(String.fromCharCode(0xFE0F), "g"), ""
+            ).trim(),
             message
         )
         if (emote) emotes.push(emote)

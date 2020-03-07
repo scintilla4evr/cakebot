@@ -6,6 +6,7 @@ import { LatePatRoundEndCommand, LatePatRoundCheckCommand, LatePatRoundClubComma
 import { LatePatGuessCommand } from "./src/commands/guess";
 import { LatePatGuessesCommand } from "./src/commands/guesses";
 import { TextChannel } from "discord.js";
+import { LatePatBoardCommand } from "./src/commands/lateboard";
 
 
 export async function handler(bot: Bot) {
@@ -32,6 +33,8 @@ export async function handler(bot: Bot) {
         new LatePatRoundClubCommand(latePatState),
 
         new LatePatGuessCommand(latePatState),
-        new LatePatGuessesCommand(latePatState)
+        new LatePatGuessesCommand(latePatState),
+
+        new LatePatBoardCommand(latePatState)
     )
 }

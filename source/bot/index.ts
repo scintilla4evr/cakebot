@@ -94,7 +94,13 @@ export class Bot {
     }
 
     async getMarkedChannel(marker: string): Promise<Channel> {
-        let path = ["meta", "markedChannels", marker]
+        const env = `OVERRIDE_${marker.toUpperCase()}`
+
+        if (env in process.env) {
+            return this.client.channels.find(c => c.id === process.env[env])
+        }
+
+        const path = ["meta", "markedChannels", marker]
 
         if (!(await this.storage.exists(path))) return null
 
