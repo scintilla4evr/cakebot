@@ -4,13 +4,30 @@ import { Message } from "discord.js";
 import substitute from "../util/substitute";
 import { range } from "../../../bot/util/range";
 import { mod } from "../../../bot/util/mod";
+import { DocsCommandArgType } from "../../../bot/docs/types";
 
 export class Rot13Command extends EditableCommand {
     constructor() {
         super(
             "cmd.crypto.rot13",
             "rot13",
-            "$str:string"
+            "$str:string",
+            {
+                description: "Decodes a string encoded with ROT13.",
+                parameters: [
+                    {
+                        name: "str",
+                        type: DocsCommandArgType.string,
+                        description: "A string of letters"
+                    }
+                ],
+                usage: [
+                    {
+                        description: "Decoding a secret Illuminati messge",
+                        syntax: `PNGF vf gur orfg zbivr`
+                    }
+                ]
+            }
         )
     }
 
@@ -33,7 +50,28 @@ export class RotNCommand extends EditableCommand {
         super(
             "cmd.crypto.rot",
             "rot",
-            "$n:number $str:string"
+            "$n:number $str:string",
+            {
+                description: "Decodes a string encoded with ROT.",
+                parameters: [
+                    {
+                        name: "n",
+                        type: DocsCommandArgType.number,
+                        description: "A number in the range 1-25"
+                    },
+                    {
+                        name: "str",
+                        type: DocsCommandArgType.string,
+                        description: "A string of letters"
+                    }
+                ],
+                usage: [
+                    {
+                        description: "Decoding a secret Illuminati messge",
+                        syntax: `9 mrm bxvnxwn arwp cqn mrwtbcna`
+                    }
+                ]
+            }
         )
     }
 
@@ -57,7 +95,23 @@ export class RotAllCommand extends EditableCommand {
         super(
             "cmd.crypto.rotall",
             "rotall",
-            "$str:string"
+            "$str:string",
+            {
+                description: "Decodes a string encoded with ROTn for all n.",
+                parameters: [
+                    {
+                        name: "str",
+                        type: DocsCommandArgType.string,
+                        description: "A string of letters"
+                    }
+                ],
+                usage: [
+                    {
+                        description: "Decoding a secret Illuminati messge",
+                        syntax: `QICH Tqtto`
+                    }
+                ]
+            }
         )
     }
 

@@ -15,6 +15,7 @@ import { MessageWatcher } from "./watcher"
 import { processMessage } from "./commands/processor"
 import { processConversations, IConversationHandler, startConversation, Conversation, endConversation } from "./conversation"
 import { start } from "repl"
+import { logMessageStat } from "./profile/statistics"
 
 export class Bot {
     public client: Client
@@ -39,6 +40,9 @@ export class Bot {
             this.logger.messageReceive(message)
 
             if (message.author === this.client.user) return
+
+            // Telemetry, amirite?
+            await logMessageStat(this, message)
 
             if (await processConversations(this, message)) return
 

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>CakeBot</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body class="blue">
+        <nav>
+            <a href="index.html">
+                <div class="cakeLogo">
+                    <img src="cake.svg">
+                </div>
+            </a>
+        </nav>
+        
+        <section class="commands">
+            <h1>CakeBot command docs</h1>
+
+            <a name="cmd.rng.8ball">
+<h2>$8ball</h2>
+
+<p class="description">Provides a specific and on point yes/no answer to a question.</p>
+
+<h3>Syntax</h3>
+<pre>$8ball </pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.rng.8ball_question"></a>
+                <code>question</code> - The question you want to give to the ball.
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Asking a simple question</p>
+                <pre class="usage">$8ball Is the sky blue?</pre>
+            
+
+                <p class="usage">Complex queries</p>
+                <pre class="usage">$8ball Is the string theory an accurate description of the nature of the Universe?</pre>
+            
+    
+
+
+<a name="cmd.rng.roll">
+<h2>$roll</h2>
+
+<p class="description">Rolls an n-sided die.</p>
+
+<h3>Syntax</h3>
+<pre>$roll <em class="argument" data-type="number">sides</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.rng.roll_sides"></a>
+                <code>sides</code> - The number of the die sides.
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Roll a D6, sis.</p>
+                <pre class="usage">$roll 6</pre>
+            
+
+                <p class="usage">Roll a D128, hunty.</p>
+                <pre class="usage">$roll 100</pre>
+            
+    
+
+
+<a name="cmd.crypto.morse">
+<h2>$morse</h2>
+
+<p class="description">Decodes a string of dots and dashes.</p>
+
+<h3>Syntax</h3>
+<pre>$morse <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.morse_str"></a>
+                <code>str</code> - A string of Morse code
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Decoding a secret Illuminati messge</p>
+                <pre class="usage">$morse ... - .- -. .-.. --- --- -. .-</pre>
+            
+    
+
+
+<a name="cmd.crypto.a1z26">
+<h2>$a1z26</h2>
+
+<p class="description">Decodes an A1Z26-encoded string of digits.</p>
+
+<h3>Syntax</h3>
+<pre>$a1z26 <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.a1z26_str"></a>
+                <code>str</code> - A string of numbers
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Decoding a secret Illuminati messge</p>
+                <pre class="usage">$a1z26 255520 25520</pre>
+            
+    
+
+
+<a name="cmd.crypto.atbash">
+<h2>$atbash</h2>
+
+<p class="description">Decodes an Atbash-encoded string.</p>
+
+<h3>Syntax</h3>
+<pre>$atbash <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.atbash_str"></a>
+                <code>str</code> - A text string
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Decoding a secret Illuminati messge</p>
+                <pre class="usage">$atbash "lDl dszg'h gsrh?"</pre>
+            
+    
+
+
+<a name="cmd.crypto.base64">
+<h2>$base64</h2>
+
+<p class="description">Decodes a string of text encoded in Base64.</p>
+
+<h3>Syntax</h3>
+<pre>$base64 <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.base64_str"></a>
+                <code>str</code> - A string encoded in Base64
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Decoding a secret Illuminati messge</p>
+                <pre class="usage">$base64 bWUgbWUgYmlnIGJveQ==</pre>
+            
+    
+
+
+<a name="cmd.crypto.hex">
+<h2>$hex</h2>
+
+<p class="description">Decodes a string of hex digits.</p>
+
+<h3>Syntax</h3>
+<pre>$hex <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.hex_str"></a>
+                <code>str</code> - A string of hex digits (0-9, A-F)
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Decoding a secret Illuminati messge</p>
+                <pre class="usage">$hex 414C5958205941204641524741542059412047414E</pre>
+            
+    
+
+
+<a name="cmd.crypto.binary">
+<h2>$binary</h2>
+
+<p class="description">Decodes a string of binary digits.</p>
+
+<h3>Syntax</h3>
+<pre>$binary <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.binary_str"></a>
+                <code>str</code> - A string of 0s and 1s
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Decoding a secret Illuminati messge</p>
+                <pre class="usage">$binary 01001000 01101001 00100000 01110011 01101001 01110011 01110100 01100101 01110010 01110011 00100001</pre>
+            
+    
+
+
+<a name="cmd.crypto.rot13">
+<h2>$rot13</h2>
+
+<p class="description">Decodes a string encoded with ROT13.</p>
+
+<h3>Syntax</h3>
+<pre>$rot13 <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.rot13_str"></a>
+                <code>str</code> - A string of letters
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Decoding a secret Illuminati messge</p>
+                <pre class="usage">$rot13 PNGF vf gur orfg zbivr</pre>
+            
+    
+
+
+<a name="cmd.crypto.rot">
+<h2>$rot</h2>
+
+<p class="description">Decodes a string encoded with ROT.</p>
+
+<h3>Syntax</h3>
+<pre>$rot <em class="argument" data-type="number">n</em> <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.rot_n"></a>
+                <code>n</code> - A number in the range 1-25
+            </li>
+        
+
+            <li>
+                <a name="cmd.crypto.rot_str"></a>
+                <code>str</code> - A string of letters
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Decoding a secret Illuminati messge</p>
+                <pre class="usage">$rot 9 mrm bxvnxwn arwp cqn mrwtbcna</pre>
+            
+    
+
+
+<a name="cmd.crypto.rotall">
+<h2>$rotall</h2>
+
+<p class="description">Decodes a string encoded with ROTn for all n.</p>
+
+<h3>Syntax</h3>
+<pre>$rotall <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.rotall_str"></a>
+                <code>str</code> - A string of letters
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Decoding a secret Illuminati messge</p>
+                <pre class="usage">$rotall QICH Tqtto</pre>
+            
+    
+
+
+<a name="cmd.crypto.vigenere">
+<h2>$vigenere</h2>
+
+<p class="description">Decodes an A1Z26-encoded string of digits.</p>
+
+<h3>Syntax</h3>
+<pre>$vigenere <em class="argument" data-type="singlestr">key</em> <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.vigenere_key"></a>
+                <code>key</code> - The decryption key.
+            </li>
+        
+
+            <li>
+                <a name="cmd.crypto.vigenere_str"></a>
+                <code>str</code> - An encrypted string.
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Decoding a secret Illuminati messge</p>
+                <pre class="usage">$vigenere "cakebot" "Fax mt o ekzkve"</pre>
+            
+    
+
+
+<a name="cmd.crypto.frequency">
+<h2>$frequency</h2>
+
+<p class="description">Lists the number of occurences of every character in a string.</p>
+
+<h3>Syntax</h3>
+<pre>$frequency <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.crypto.frequency_str"></a>
+                <code>str</code> - A string to analize
+            </li>
+        
+        </ul>
+
+
+
+
+
+<a name="cmd.reaction.rulespray">
+<h2>$rulespray</h2>
+
+<p class="description">Ssss! You have been sprayed with the rule spray!</p>
+
+<h3>Syntax</h3>
+<pre>$rulespray </pre>
+
+
+
+
+
+
+<a name="cmd.reaction.reverse">
+<h2>$reverse</h2>
+
+<p class="description">no u</p>
+
+<h3>Syntax</h3>
+<pre>$reverse </pre>
+
+
+
+
+
+
+<a name="cmd.reaction.microwavecat">
+<h2>$microwavecat</h2>
+
+<p class="description">Microwave the cat!</p>
+
+<h3>Syntax</h3>
+<pre>$microwavecat </pre>
+
+
+
+
+
+
+<a name="cmd.reaction.sinalert">
+<h2>$sinalert</h2>
+
+<p class="description">Did someone sin??</p>
+
+<h3>Syntax</h3>
+<pre>$sinalert </pre>
+
+
+
+
+
+
+<a name="cmd.games.games">
+<h2>$games</h2>
+
+<p class="description">Shows a list of available games to play in the games chat.</p>
+
+<h3>Syntax</h3>
+<pre>$games </pre>
+
+
+
+
+
+
+<a name="cmd.games.game">
+<h2>$game</h2>
+
+<p class="description">Starts a game</p>
+
+<h3>Syntax</h3>
+<pre>$game <em class="argument" data-type="string">name</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.games.game_name"></a>
+                <code>name</code> - The ID of the game (use $games to get a list of all IDs)
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Play hangman.</p>
+                <pre class="usage">$game hangman</pre>
+            
+    
+
+
+<a name="cmd.jokes.owo">
+<h2>$owo</h2>
+
+<p class="description">Performs a crime against humanity. Owo!</p>
+
+<h3>Syntax</h3>
+<pre>$owo <em class="argument" data-type="string">str</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.jokes.owo_str"></a>
+                <code>str</code> - A piece of text to be owo-ified
+            </li>
+        
+        </ul>
+
+
+
+
+
+<a name="cmd.jokes.copystrike">
+<h2>$copystrike</h2>
+
+<p class="description">Copyright strike!</p>
+
+<h3>Syntax</h3>
+<pre>$copystrike <em class="argument" data-type="string">entity</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.jokes.copystrike_entity"></a>
+                <code>entity</code> - A legal entity to strike
+            </li>
+        
+        </ul>
+
+
+
+
+
+<a name="cmd.latepat.guess">
+<h2>$guess</h2>
+
+<p class="description">Puts your guess in or modifies your previous guess in a LatePat guessing round.</p>
+
+<h3>Syntax</h3>
+<pre>$guess <em class="argument" data-type="number">guess</em></pre>
+
+
+        <h3>Parameters</h3>
+        <ul>
+
+            <li>
+                <a name="cmd.latepat.guess_guess"></a>
+                <code>guess</code> - Your guess, in minutes.
+            </li>
+        
+        </ul>
+
+
+
+            <h3>Examples</h3>
+    
+                <p class="usage">Guess 5 minutes.</p>
+                <pre class="usage">$guess 5</pre>
+            
+
+                <p class="usage">Guess -432.52 minutes.</p>
+                <pre class="usage">$guess -432.52</pre>
+            
+    
+
+
+<a name="cmd.latepat.guesses">
+<h2>$guesses</h2>
+
+<p class="description">Displays a list of all guesses in the current LatePat round, together with some stats.</p>
+
+<h3>Syntax</h3>
+<pre>$guesses </pre>
+
+
+
+
+
+
+<a name="cmd.latepat.lateboard">
+<h2>$lateboard</h2>
+
+<p class="description">Displays the top 5 LatePat Guessing players.</p>
+
+<h3>Syntax</h3>
+<pre>$lateboard </pre>
+
+
+
+
+
+        </section>
+    </body>
+</html>

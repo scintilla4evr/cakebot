@@ -3,13 +3,35 @@ import { Bot } from "../../../bot";
 import { Message } from "discord.js";
 import substitute from "../util/substitute";
 import { stringToAlphabetIndices } from "../util/alphabet";
-
+import { DocsCommandArgType } from "../../../bot/docs/types";
+"Fax mt o ekzkve"
 export class VigenereCommand extends EditableCommand {
     constructor() {
         super(
             "cmd.crypto.vigenere",
             "vigenere",
-            "$key:singlestr $str:string"
+            "$key:singlestr $str:string",
+            {
+                description: "Decodes an A1Z26-encoded string of digits.",
+                parameters: [
+                    {
+                        name: "key",
+                        type: DocsCommandArgType.string,
+                        description: "The decryption key."
+                    },
+                    {
+                        name: "str",
+                        type: DocsCommandArgType.string,
+                        description: "An encrypted string."
+                    }
+                ],
+                usage: [
+                    {
+                        description: "Decoding a secret Illuminati messge",
+                        syntax: `"cakebot" "Fax mt o ekzkve"`
+                    }
+                ]
+            }
         )
     }
 

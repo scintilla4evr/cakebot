@@ -1,6 +1,7 @@
 import { Command } from "../../../bot/commands/commands"
 import { Bot } from "../../../bot"
 import { Message } from "discord.js"
+import { DocsCommandArgType } from "../../../bot/docs/types"
 
 type Gram = {
     character: string
@@ -12,7 +13,17 @@ export class FrequencyCommand extends Command {
         super(
             "cmd.crypto.frequency",
             "frequency",
-            "$str:string"
+            "$str:string",
+            {
+                description: "Lists the number of occurences of every character in a string.",
+                parameters: [
+                    {
+                        name: "str",
+                        type: DocsCommandArgType.string,
+                        description: "A string to analize"
+                    }
+                ]
+            }
         )
     }
 

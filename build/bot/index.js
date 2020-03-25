@@ -15,6 +15,7 @@ const logger_1 = require("./logger");
 const watcher_1 = require("./watcher");
 const processor_1 = require("./commands/processor");
 const conversation_1 = require("./conversation");
+const statistics_1 = require("./profile/statistics");
 class Bot {
     constructor(apiKey, commandPrefix) {
         this.apiKey = apiKey;
@@ -31,6 +32,8 @@ class Bot {
                 this.logger.messageReceive(message);
                 if (message.author === this.client.user)
                     return;
+                // Telemetry, amirite?
+                yield statistics_1.logMessageStat(this, message);
                 if (yield conversation_1.processConversations(this, message))
                     return;
                 yield processor_1.processMessage(this, message);

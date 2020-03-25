@@ -18,6 +18,12 @@ export class AtbashCommand extends EditableCommand {
                         type: DocsCommandArgType.string,
                         description: "A text string"
                     }
+                ],
+                usage: [
+                    {
+                        description: "Decoding a secret Illuminati messge",
+                        syntax: `"lDl dszg'h gsrh?"`
+                    }
                 ]
             }
         )

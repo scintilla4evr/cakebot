@@ -58,6 +58,12 @@ export class A1Z26Command extends EditableCommand {
                         type: DocsCommandArgType.number,
                         description: "A string of numbers"
                     }
+                ],
+                usage: [
+                    {
+                        description: "Decoding a secret Illuminati messge",
+                        syntax: `255520 25520`
+                    }
                 ]
             }
         )

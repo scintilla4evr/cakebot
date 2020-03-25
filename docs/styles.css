@@ -1,0 +1,86 @@
+@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic);
+body {
+  --blue: #210FBE;
+  --purple: #8910FF;
+  --cyan: #00FFCF;
+  --orange: #FF5600;
+  --white: #fff;
+  --black: #000;
+  --page-bg: var(--white);
+  --page-bg2: var(--white);
+  --page-fg: var(--black);
+  --page-accent: var(--purple);
+  background: var(--page-bg);
+  color: var(--page-fg);
+  font-family: "IBM Plex Mono";
+}
+body.cyan {
+  --page-bg: var(--cyan);
+}
+body.blue {
+  --page-bg: var(--blue);
+}
+body.purple {
+  --page-bg: var(--purple);
+}
+
+nav {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+}
+nav div.cakeLogo {
+  background: var(--page-bg2);
+  font-size: 0;
+}
+nav div.cakeLogo img {
+  width: 48px;
+  height: 48px;
+  margin: 4px;
+}
+
+section {
+  background: var(--page-bg2);
+  margin: 0px 0px 8px 0px;
+  padding: 12px 16px;
+}
+section h1 {
+  margin: 0px 0px 16px 0px;
+}
+section.hero h1 {
+  font-size: 30pt;
+  font-weight: 300;
+}
+section.commands p {
+  margin: 4px 0px;
+}
+section.commands h1 {
+  font-size: 24pt;
+  font-weight: 300;
+}
+section.commands h2 {
+  color: var(--page-bg);
+  margin: 16px 0px 4px 0px;
+}
+section.commands pre, section.commands code {
+  background: #eee;
+  font-size: 12pt;
+  padding: 8px 12px;
+}
+section.commands pre em, section.commands code em {
+  background: var(--purple);
+  color: var(--white);
+  padding: 2px 8px;
+}
+section a.link {
+  background: var(--cyan);
+  color: var(--black);
+  padding: 8px 16px;
+  display: inline-block;
+}
+section a.link.primary {
+  background: var(--blue);
+  color: var(--white);
+}
+
+/*# sourceMappingURL=styles.css.map */

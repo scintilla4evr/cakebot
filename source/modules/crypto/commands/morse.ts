@@ -1,6 +1,7 @@
 import { Command, EditableCommand } from "../../../bot/commands/commands";
 import { Bot } from "../../../bot";
 import { Message } from "discord.js";
+import { DocsCommandArgType } from "../../../bot/docs/types";
 
 let morse: {
     encode: (raw: string) => string
@@ -12,7 +13,23 @@ export class MorseCommand extends EditableCommand {
         super(
             "cmd.crypto.morse",
             "morse",
-            "$str:string"
+            "$str:string",
+            {
+                description: "Decodes a string of dots and dashes.",
+                parameters: [
+                    {
+                        name: "str",
+                        type: DocsCommandArgType.string,
+                        description: "A string of Morse code"
+                    }
+                ],
+                usage: [
+                    {
+                        description: "Decoding a secret Illuminati messge",
+                        syntax: `... - .- -. .-.. --- --- -. .-`
+                    }
+                ]
+            }
         )
     }
 

@@ -3,6 +3,7 @@ import { Command } from "../../bot/commands/commands";
 import { Message, TextChannel } from "discord.js";
 import { IConversationHandler, IConversationHandlerCtor } from "../../bot/conversation";
 import { HangmanGame } from "./games/hangman";
+import { DocsCommandArgType } from "../../bot/docs/types";
 
 let gamesChannel: TextChannel
 
@@ -25,7 +26,11 @@ class GamesCommand extends Command {
         super(
             "cmd.games.games",
             "games",
-            ""
+            "",
+            {
+                description: "Shows a list of available games to play in the games chat.",
+                parameters: []
+            }
         )
     }
 
@@ -50,7 +55,23 @@ class GameCommand extends Command {
         super(
             "cmd.games.game",
             "game",
-            "$name?:string"
+            "$name?:string",
+            {
+                description: "Starts a game.",
+                parameters: [
+                    {
+                        description: "The ID of the game (use $games to get a list of all IDs)",
+                        type: DocsCommandArgType.string,
+                        name: "name"
+                    }
+                ],
+                usage: [
+                    {
+                        description: "Play hangman.",
+                        syntax: "hangman"
+                    }
+                ]
+            }
         )
     }
 
@@ -78,7 +99,11 @@ class ExitGameCommand extends Command {
         super(
             "cmd.games.exitgame",
             "exitgame",
-            ""
+            "",
+            {
+                description: "Ends a game.",
+                parameters: []
+            }
         )
     }
 

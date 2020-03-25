@@ -10,7 +10,11 @@ export class LatePatBoardCommand extends Command {
         super(
             "cmd.latepat.lateboard",
             "lateboard",
-            ""
+            "",
+            {
+                description: "Displays the top 5 LatePat Guessing players.",
+                parameters: []
+            }
         )
     }
 
@@ -52,7 +56,9 @@ export class LatePatBoardCommand extends Command {
 
         const orderedWinners = Object.keys(winners).sort(
             (w1, w2) => {
-                return winners[w2].count - winners[w1].count
+                const countDiff = winners[w2].count - winners[w1].count
+                if (countDiff !== 0) return countDiff
+                return winners[w1].avg - winners[w2].avg
             }
         ).map((winner, i) => {
             const member = (message.channel as GuildChannel).guild.members.find(m => m.id === winner)
